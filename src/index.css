@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Exo+2:wght@300;400;600&family=Major+Mono+Display&display=swap');
+
+:root {
+  /* === COLORES OFICIALES BEATSUPPLIER === */
+  /* Paleta primaria - Tonos fríos cristalinos */
+  --bs-azul-celeste: #A8EFFF;
+  --bs-verde-menta: #B8FFEC;
+  --bs-cian-electrico: #00F7FF;
+  
+  /* Paleta de acentos - Tonos psicodélicos */
+  --bs-rosa-pastel: #FAD5FF;
+  --bs-violeta-neon: #C385FF;
+  
+  /* Colores neutros y de apoyo */
+  --bs-blanco-iridiscente: rgba(255, 255, 255, 0.4);
+  --bs-gris-perla: rgba(229, 229, 229, 0.25);
+  --bs-negro-hud: rgba(15, 15, 15, 0.85);
+  --bs-azul-petroleo: rgba(44, 62, 80, 0.75);
+  
+  /* === GRADIENTES OFICIALES === */
+  --bs-gradient-iris: linear-gradient(135deg, var(--bs-azul-celeste) 0%, var(--bs-rosa-pastel) 50%, var(--bs-verde-menta) 100%);
+  --bs-gradient-bruma: linear-gradient(90deg, rgba(195,133,255,0.8) 0%, rgba(0,247,255,0.85) 50%, rgba(168,239,255,0.75) 100%);
+  --bs-gradient-cristal: radial-gradient(circle at center, var(--bs-rosa-pastel) 0%, var(--bs-cian-electrico) 40%, var(--bs-azul-petroleo) 100%);
+  
+  /* === TIPOGRAFÍAS OFICIALES === */
+  --bs-font-primary: 'Orbitron', 'Arial', sans-serif;
+  --bs-font-secondary: 'Exo 2', 'Helvetica', sans-serif;
+  --bs-font-mono: 'Major Mono Display', 'Courier New', monospace;
+  
+  /* === ESPACIADO Y PROPORCIONES === */
+  --bs-spacing-xs: 0.5rem;
+  --bs-spacing-sm: 1rem;
+  --bs-spacing-md: 1.5rem;
+  --bs-spacing-lg: 2rem;
+  --bs-spacing-xl: 3rem;
+  --bs-border-radius: 12px;
+  --bs-border-radius-sm: 8px;
+
+  font-family: var(--bs-font-primary);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: transparent; /* Permitir que se vea el fondo iridiscente */
+  overflow-x: hidden;
+  font-family: var(--bs-font-primary);
+}
+
+a {
+  font-weight: 500;
+  color: var(--bs-cian-electrico);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--bs-azul-celeste);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  font-family: var(--bs-font-primary);
+}
+
+button {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--bs-cian-electrico);
+  outline-offset: 2px;
+}

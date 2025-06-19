@@ -1,0 +1,101 @@
+/* Clean Navigation Styles */
+.clean-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(168, 239, 255, 0.2);
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+}
+
+.logo-svg {
+  height: 45px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: all 0.4s ease;
+}
+
+.logo-svg:hover {
+  transform: scale(1.1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(168, 239, 255, 0.6));
+}
+
+/* Logo Metallic Effect */
+.logo-metallic {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  background: linear-gradient(45deg, 
+    rgba(168, 239, 255, 0.1) 0%,
+    rgba(250, 213, 255, 0.1) 50%,
+    rgba(184, 255, 236, 0.1) 100%);
+  border: 1px solid rgba(168, 239, 255, 0.2);
+}
+
+.logo-metallic:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(45deg, 
+    rgba(168, 239, 255, 0.2) 0%,
+    rgba(250, 213, 255, 0.2) 50%,
+    rgba(184, 255, 236, 0.2) 100%);
+  border-color: rgba(168, 239, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(168, 239, 255, 0.3);
+}
+
+/* Main Navigation */
+.main-nav {
+  margin-left: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .clean-navigation {
+    padding: 1rem;
+  }
+  
+  .logo-svg {
+    height: 35px;
+  }
+  
+  .logo-metallic {
+    padding: 0.5rem;
+  }
+  
+  .main-nav {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .clean-navigation {
+    padding: 0.75rem;
+  }
+  
+  .logo-svg {
+    height: 30px;
+  }
+  
+  .logo-metallic {
+    padding: 0.4rem;
+  }
+  
+  .main-nav {
+    transform: scale(0.8);
+  }
+}

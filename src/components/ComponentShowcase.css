@@ -1,0 +1,294 @@
+.showcase {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.showcase-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.showcase-section {
+  margin-bottom: 6rem;
+}
+
+.section-title {
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--bs-gradient-iris, linear-gradient(135deg, #A8EFFF 0%, #FAD5FF 50%, #B8FFEC 100%));
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  justify-items: center;
+}
+
+.showcase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--bs-border-radius, 12px);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-height: 200px;
+  justify-content: center;
+}
+
+.showcase-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(168, 239, 255, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(168, 239, 255, 0.1);
+}
+
+.showcase-label {
+  font-family: var(--bs-font-secondary, 'Exo 2', Helvetica, sans-serif);
+  font-size: 0.9rem;
+  color: var(--bs-gris-perla, rgba(229, 229, 229, 0.7));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Card styles */
+.glare-card {
+  background: rgba(15, 15, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glare-card-alt {
+  background: rgba(25, 15, 25, 0.8);
+  border: 1px solid rgba(250, 213, 255, 0.2);
+}
+
+.card-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.card-content h3 {
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-content p {
+  font-family: var(--bs-font-secondary, 'Exo 2', Helvetica, sans-serif);
+  font-size: 0.9rem;
+  color: var(--bs-gris-perla, rgba(229, 229, 229, 0.7));
+  margin: 0 0 1rem 0;
+}
+
+.card-price {
+  font-family: var(--bs-font-mono, 'Major Mono Display', 'Courier New', monospace);
+  font-size: 1rem;
+  color: var(--bs-cian-electrico, #00F7FF);
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+}
+
+/* Button styles */
+.magnet-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--bs-border-radius, 12px);
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+  cursor: pointer;
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.magnet-btn-primary {
+  background: var(--bs-gradient-bruma, linear-gradient(90deg, rgba(195,133,255,0.8) 0%, rgba(0,247,255,0.85) 50%, rgba(168,239,255,0.75) 100%));
+  color: var(--bs-negro-hud, rgba(15, 15, 15, 0.9));
+  border-color: transparent;
+}
+
+.magnet-btn:hover {
+  box-shadow: 0 0 20px rgba(168, 239, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.magnet-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--bs-border-radius, 12px);
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.magnet-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 25px rgba(195, 133, 255, 0.2);
+}
+
+/* Additional styles for new components */
+.scramble-demo {
+  max-width: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--bs-border-radius, 12px);
+  text-align: center;
+}
+
+.spotlight-demo {
+  width: 280px;
+  min-height: 200px;
+}
+
+/* FluidGlass demo styles */
+.fluid-glass-demo {
+  width: 280px;
+  min-height: 180px;
+  margin: 0 auto;
+}
+
+.fluid-glass-demo .nav-item {
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.fluid-glass-demo .nav-item:hover {
+  background: rgba(168, 239, 255, 0.1);
+  color: var(--bs-cian-electrico, #00F7FF);
+  text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+  transform: translateX(3px);
+}
+
+/* Card grid adjustments */
+.showcase-grid .tilted-card {
+  margin: 0 auto;
+}
+
+.showcase-grid .spotlight-card {
+  margin: 0 auto;
+}
+
+/* Enhanced responsive design for cards */
+@media (max-width: 768px) {
+  .showcase {
+    padding: 2rem 1rem;
+  }
+
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .showcase-item {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+
+  .glare-card {
+    width: 100% !important;
+    max-width: 300px;
+  }
+
+  .magnet-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .showcase-grid .tilted-card,
+  .showcase-grid .spotlight-card {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .scramble-demo {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    padding: 0.75rem;  }
+}
+
+/* Metallic Paint Demo Styles */
+.metallic-demo {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.metallic-demo:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Gooey Nav Demo Styles */
+.gooey-demo {
+  margin: 1rem 0;
+}
+
+@media (max-width: 480px) {
+  .showcase-section {
+    margin-bottom: 4rem;
+  }
+
+  .showcase-item {
+    padding: 1rem;
+  }
+  
+  .metallic-demo {
+    padding: 1.5rem;
+  }
+  
+  .metallic-demo h1 {
+    font-size: 2rem !important;
+  }
+  
+  .metallic-demo span {
+    font-size: 1.2rem !important;
+  }
+}

@@ -1,0 +1,91 @@
+.gradient-text-container {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  max-width: fit-content;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.25rem;
+  font-weight: 500;
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gradient-text-container.with-border {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+}
+
+.gradient-border {
+  position: absolute;
+  inset: 0;
+  background-size: 300% 100%;
+  z-index: 0;
+  pointer-events: none;
+  animation: gradient-animation 8s linear infinite;
+}
+
+.gradient-border-inner {
+  position: absolute;
+  inset: 0;
+  background: var(--bs-negro-hud, rgba(15, 15, 15, 0.85));
+  border-radius: 1.25rem;
+  z-index: -1;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gradient-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 300% 100%;
+  animation: gradient-animation 8s linear infinite;
+  font-size: clamp(1.2rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hover effects */
+.gradient-text-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(168, 239, 255, 0.3);
+}
+
+.gradient-text-container:hover .gradient-text {
+  animation-duration: 2s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .gradient-text {
+    font-size: clamp(1rem, 6vw, 1.8rem);
+  }
+  
+  .gradient-text-container.with-border {
+    padding: 0.5rem 1rem;
+  }
+}

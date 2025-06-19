@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beatsupplier - Guía de Marca Visual Oficial | rom3.labs</title>
+  <meta name="description" content="Guía oficial de identidad visual y paleta de colores de Beatsupplier por rom3.labs. Especificaciones técnicas profesionales para desarrollo y diseño." />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Exo+2:wght@300;400;600&family=Major+Mono+Display&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* === COLORES OFICIALES BEATSUPPLIER === */
+      /* Paleta primaria - Tonos fríos cristalinos */
+      --bs-azul-celeste: #A8EFFF;
+      --bs-verde-menta: #B8FFEC;
+      --bs-cian-electrico: #00F7FF;
+      
+      /* Paleta de acentos - Tonos psicodélicos */
+      --bs-rosa-pastel: #FAD5FF;
+      --bs-violeta-neon: #C385FF;
+      
+      /* Colores neutros y de apoyo */
+      --bs-blanco-iridiscente: rgba(255, 255, 255, 0.4);
+      --bs-gris-perla: rgba(229, 229, 229, 0.25);
+      --bs-negro-hud: rgba(15, 15, 15, 0.85);
+      --bs-azul-petroleo: rgba(44, 62, 80, 0.75);
+      
+      /* === GRADIENTES OFICIALES === */
+      --bs-gradient-iris: linear-gradient(135deg, var(--bs-azul-celeste) 0%, var(--bs-rosa-pastel) 50%, var(--bs-verde-menta) 100%);
+      --bs-gradient-bruma: linear-gradient(90deg, rgba(195,133,255,0.8) 0%, rgba(0,247,255,0.85) 50%, rgba(168,239,255,0.75) 100%);
+      --bs-gradient-cristal: radial-gradient(circle at center, var(--bs-rosa-pastel) 0%, var(--bs-cian-electrico) 40%, var(--bs-azul-petroleo) 100%);
+      
+      /* === TIPOGRAFÍAS OFICIALES === */
+      --bs-font-primary: 'Orbitron', 'Arial', sans-serif;
+      --bs-font-secondary: 'Exo 2', 'Helvetica', sans-serif;
+      --bs-font-mono: 'Major Mono Display', 'Courier New', monospace;
+      
+      /* === ESPACIADO Y PROPORCIONES === */
+      --bs-spacing-xs: 0.5rem;
+      --bs-spacing-sm: 1rem;
+      --bs-spacing-md: 1.5rem;
+      --bs-spacing-lg: 2rem;
+      --bs-spacing-xl: 3rem;
+      --bs-border-radius: 12px;
+      --bs-border-radius-sm: 8px;
+    }    /* === RESET Y BASE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--bs-font-primary);
+      background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--bs-spacing-lg);
+    }
+
+    /* === ENCABEZADO CORPORATIVO === */
+    .header {
+      text-align: center;
+      padding: var(--bs-spacing-xl) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: var(--bs-spacing-xl);
+      position: relative;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: var(--bs-gradient-iris);
+      border-radius: 2px;
+    }
+
+    .logo {
+      font-family: var(--bs-font-primary);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      background: var(--bs-gradient-iris);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.15em;
+      margin-bottom: var(--bs-spacing-sm);
+      line-height: 1.1;
+    }
+
+    .tagline {
+      font-family: var(--bs-font-secondary);
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* === ESTRUCTURA DE SECCIONES === */
+    .section {
+      margin: var(--bs-spacing-xl) 0;
+      scroll-margin-top: var(--bs-spacing-lg);
+    }
+
+    .section-title {
+      font-family: var(--bs-font-primary);
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      font-weight: 600;
+      color: var(--bs-cian-electrico);
+      margin-bottom: var(--bs-spacing-md);
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--bs-cian-electrico);
+      margin: var(--bs-spacing-sm) auto 0;
+      opacity: 0.6;
+    }
+
+    .section-subtitle {
+      font-family: var(--bs-font-secondary);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: var(--bs-spacing-lg);
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* === GRID DE COLORES === */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--bs-spacing-md);
+      margin: var(--bs-spacing-lg) 0;
+    }
+
+    .color-card {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--bs-border-radius);
+      padding: var(--bs-spacing-md);
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--bs-gradient-bruma);
+      border-radius: var(--bs-border-radius);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .color-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(168, 239, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .color-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .color-swatch {
+      width: 100%;
+      height: 120px;
+      border-radius: var(--bs-border-radius-sm);
+      margin-bottom: var(--bs-spacing-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-swatch::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+      pointer-events: none;
+    }
+
+    .color-name {
+      font-family: var(--bs-font-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--bs-spacing-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+    }
+
+    .color-code {
+      font-family: var(--bs-font-mono);
+      font-size: 0.95rem;
+      color: var(--bs-cian-electrico);
+      margin-bottom: var(--bs-spacing-xs);
+      font-weight: 500;
+    }
+
+    .color-rgb {
+      font-family: var(--bs-font-mono);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+    }    /* === GRADIENTES SHOWCASE === */
+    .gradient-showcase {
+      display: grid;
+      gap: var(--bs-spacing-md);
+      margin: var(--bs-spacing-lg) 0;
+    }
+
+    .gradient-item {
+      border-radius: var(--bs-border-radius);
+      height: 140px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gradient-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .gradient-label {
+      position: absolute;
+      bottom: var(--bs-spacing-md);
+      left: var(--bs-spacing-md);
+      font-family: var(--bs-font-secondary);
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.2);
+      padding: var(--bs-spacing-xs) var(--bs-spacing-sm);
+      border-radius: var(--bs-border-radius-sm);
+    }
+
+    /* === PALETA DE REFERENCIA === */
+    .reference-palette {
+      background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+      padding: var(--bs-spacing-lg);
+      border-radius: var(--bs-border-radius);
+      margin: var(--bs-spacing-lg) 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--bs-spacing-md);
+    }
+
+    .reference-color {
+      padding: var(--bs-spacing-md);
+      border-radius: var(--bs-border-radius-sm);
+      text-align: center;
+      font-weight: 600;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .reference-color:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .reference-color h4 {
+      font-size: 1rem;
+      margin-bottom: var(--bs-spacing-xs);
+      font-family: var(--bs-font-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .reference-color .code {
+      font-family: var(--bs-font-mono);
+      font-size: 0.85rem;
+      margin: 0.25rem 0;
+      opacity: 0.8;
+    }
+
+    /* === ESPECIFICACIONES TÉCNICAS === */
+    .tech-specs {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--bs-border-radius);
+      padding: var(--bs-spacing-lg);
+      margin: var(--bs-spacing-lg) 0;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--bs-spacing-lg);
+      margin-top: var(--bs-spacing-md);
+    }
+
+    .spec-item h4 {
+      font-family: var(--bs-font-secondary);
+      color: var(--bs-cian-electrico);
+      margin-bottom: var(--bs-spacing-md);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .spec-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .spec-item li {
+      font-family: var(--bs-font-secondary);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: var(--bs-spacing-xs);
+      padding-left: var(--bs-spacing-md);
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .spec-item li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--bs-cian-electrico);
+      font-weight: bold;
+    }
+
+    /* === CÓDIGO CSS EXPORTABLE === */
+    .code-export {
+      background: #0d1117;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--bs-border-radius-sm);
+      padding: var(--bs-spacing-md);
+      margin: var(--bs-spacing-md) 0;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .code-export::before {
+      content: 'CSS Variables';
+      position: absolute;
+      top: var(--bs-spacing-xs);
+      right: var(--bs-spacing-sm);
+      font-family: var(--bs-font-mono);
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .code-export pre {
+      font-family: var(--bs-font-mono);
+      font-size: 0.85rem;
+      color: var(--bs-cian-electrico);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* === TIPOGRAFÍA SHOWCASE === */
+    .typography-showcase {
+      text-align: center;
+      margin: var(--bs-spacing-lg) 0;
+    }
+
+    .font-example {
+      margin: var(--bs-spacing-md) 0;
+      padding: var(--bs-spacing-md);
+      border-radius: var(--bs-border-radius-sm);
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .font-example:hover {
+      background: rgba(255, 255, 255, 0.025);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .font-primary {
+      font-family: var(--bs-font-primary);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      background: var(--bs-gradient-iris);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: var(--bs-spacing-xs);
+    }
+
+    .font-secondary {
+      font-family: var(--bs-font-secondary);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: var(--bs-spacing-xs);
+    }
+
+    .font-mono {
+      font-family: var(--bs-font-mono);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--bs-cian-electrico);
+      letter-spacing: 0.05em;
+      margin-bottom: var(--bs-spacing-xs);
+    }
+
+    .font-description {
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--bs-font-secondary);
+      font-size: 0.9rem;
+      margin-top: var(--bs-spacing-xs);
+      font-style: italic;
+    }    /* === FOOTER CORPORATIVO === */
+    .footer {
+      text-align: center;
+      padding: var(--bs-spacing-lg) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: var(--bs-spacing-xl);
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 1px;
+      background: var(--bs-gradient-iris);
+    }
+
+    .footer p {
+      font-family: var(--bs-font-secondary);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: var(--bs-spacing-xs);
+    }
+
+    .footer .copyright {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* === NOTIFICACIÓN DE COPIA === */
+    .copy-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bs-cian-electrico);
+      color: #000000;
+      padding: var(--bs-spacing-sm) var(--bs-spacing-md);
+      border-radius: var(--bs-border-radius-sm);
+      font-weight: 600;
+      font-family: var(--bs-font-secondary);
+      transform: translateX(300px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 247, 255, 0.3);
+    }
+
+    .copy-notification.show {
+      transform: translateX(0);
+    }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--bs-spacing-sm);
+      }
+      
+      .header {
+        padding: var(--bs-spacing-lg) 0;
+      }
+      
+      .logo {
+        font-size: 2.5rem;
+      }
+      
+      .color-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: var(--bs-spacing-sm);
+      }
+      
+      .spec-grid {
+        grid-template-columns: 1fr;
+        gap: var(--bs-spacing-md);
+      }
+      
+      .reference-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      
+      .code-export {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .color-card {
+        padding: var(--bs-spacing-sm);
+      }
+      
+      .color-swatch {
+        height: 100px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    /* === UTILIDADES DE ACCESIBILIDAD === */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* === MODO DE ALTO CONTRASTE === */
+    @media (prefers-contrast: high) {
+      .color-card {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      
+      .section-subtitle,
+      .color-rgb {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- === ENCABEZADO CORPORATIVO === -->
+    <header class="header">
+      <h1 class="logo">BEATSUPPLIER</h1>
+      <p class="tagline">rom3.labs • Guía de Marca Visual Oficial</p>
+    </header>
+
+    <!-- === SECCIÓN 1: COLORES PRIMARIOS === -->
+    <section class="section" id="colores-primarios">
+      <h2 class="section-title">Colores Primarios</h2>
+      <p class="section-subtitle">
+        Tonos fríos cristalinos que evocan superficies metálicas líquidas e iridiscencia futurista. 
+        Estos colores forman la base de toda la identidad visual de Beatsupplier.
+      </p>
+      
+      <div class="color-grid">
+        <div class="color-card" onclick="copyColor('#A8EFFF')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-azul-celeste);"></div>
+          <h3 class="color-name">Azul Celeste</h3>
+          <p class="color-code">#A8EFFF</p>
+          <p class="color-rgb">RGB(168, 239, 255)</p>
+        </div>
+        
+        <div class="color-card" onclick="copyColor('#B8FFEC')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-verde-menta);"></div>
+          <h3 class="color-name">Verde Menta</h3>
+          <p class="color-code">#B8FFEC</p>
+          <p class="color-rgb">RGB(184, 255, 236)</p>
+        </div>
+        
+        <div class="color-card" onclick="copyColor('#00F7FF')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-cian-electrico);"></div>
+          <h3 class="color-name">Cian Eléctrico</h3>
+          <p class="color-code">#00F7FF</p>
+          <p class="color-rgb">RGB(0, 247, 255)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECCIÓN 2: ACENTOS PSICODÉLICOS === -->
+    <section class="section" id="acentos-psicodelicos">
+      <h2 class="section-title">Acentos Psicodélicos</h2>
+      <p class="section-subtitle">
+        Colores vibrantes complementarios que añaden carácter psicodélico y energía visual. 
+        Inspirados en efectos holográficos y atmósferas synthwave.
+      </p>
+      
+      <div class="color-grid">
+        <div class="color-card" onclick="copyColor('#FAD5FF')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-rosa-pastel);"></div>
+          <h3 class="color-name">Rosa Pastel</h3>
+          <p class="color-code">#FAD5FF</p>
+          <p class="color-rgb">RGB(250, 213, 255)</p>
+        </div>
+        
+        <div class="color-card" onclick="copyColor('#C385FF')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-violeta-neon);"></div>
+          <h3 class="color-name">Violeta Neón</h3>
+          <p class="color-code">#C385FF</p>
+          <p class="color-rgb">RGB(195, 133, 255)</p>
+        </div>
+      </div>
+    </section>    <!-- === SECCIÓN 3: GRADIENTES OFICIALES === -->
+    <section class="section" id="gradientes-oficiales">
+      <h2 class="section-title">Gradientes Oficiales</h2>
+      <p class="section-subtitle">
+        Transiciones suaves que refuerzan la sensación líquida e iridiscente característica de la marca. 
+        Diseñados para crear profundidad y movimiento visual.
+      </p>
+      
+      <div class="gradient-showcase">
+        <div class="gradient-item" style="background: var(--bs-gradient-iris);" onclick="copyColor('linear-gradient(135deg, #A8EFFF 0%, #FAD5FF 50%, #B8FFEC 100%)')">
+          <div class="gradient-label">Iris Líquido • Gradiente Principal</div>
+        </div>
+        
+        <div class="gradient-item" style="background: var(--bs-gradient-bruma);" onclick="copyColor('linear-gradient(90deg, rgba(195,133,255,0.8) 0%, rgba(0,247,255,0.85) 50%, rgba(168,239,255,0.75) 100%)')">
+          <div class="gradient-label">Bruma Digital • Para Transparencias</div>
+        </div>
+        
+        <div class="gradient-item" style="background: var(--bs-gradient-cristal);" onclick="copyColor('radial-gradient(circle at center, #FAD5FF 0%, #00F7FF 40%, rgba(44,62,80,0.75) 100%)')">
+          <div class="gradient-label">Cristal Holográfico • Efectos Especiales</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECCIÓN 4: COLORES DE APOYO === -->
+    <section class="section" id="colores-apoyo">
+      <h2 class="section-title">Colores de Apoyo</h2>
+      <p class="section-subtitle">
+        Neutros y semi-transparentes para interfaces, fondos y elementos de soporte. 
+        Mantienen la coherencia visual sin competir con los colores principales.
+      </p>
+      
+      <div class="color-grid">
+        <div class="color-card" onclick="copyColor('rgba(255,255,255,0.4)')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-blanco-iridiscente); border: 1px solid rgba(255,255,255,0.2);"></div>
+          <h3 class="color-name">Blanco Iridiscente</h3>
+          <p class="color-code">rgba(255,255,255,0.4)</p>
+          <p class="color-rgb">Transparencia 40%</p>
+        </div>
+        
+        <div class="color-card" onclick="copyColor('rgba(229,229,229,0.25)')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-gris-perla);"></div>
+          <h3 class="color-name">Gris Perla</h3>
+          <p class="color-code">rgba(229,229,229,0.25)</p>
+          <p class="color-rgb">Elementos sutiles</p>
+        </div>
+        
+        <div class="color-card" onclick="copyColor('rgba(15,15,15,0.85)')" title="Clic para copiar">
+          <div class="color-swatch" style="background: var(--bs-negro-hud);"></div>
+          <h3 class="color-name">Negro HUD</h3>
+          <p class="color-code">rgba(15,15,15,0.85)</p>
+          <p class="color-rgb">Interfaces oscuras</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECCIÓN 5: PALETA DE REFERENCIA === -->
+    <section class="section" id="paleta-referencia">
+      <h2 class="section-title">Paleta de Referencia</h2>
+      <p class="section-subtitle">
+        Colores puros sin efectos ni transparencias para máxima precisión cromática. 
+        Incluye especificaciones en múltiples sistemas de color.
+      </p>
+      
+      <div class="reference-palette">
+        <div class="reference-grid">
+          <div class="reference-color" style="background: var(--bs-azul-celeste); color: #000;" onclick="copyColor('#A8EFFF')">
+            <h4>Azul Celeste</h4>
+            <div class="code">#A8EFFF</div>
+            <div class="code">HSL(195°, 100%, 83%)</div>
+            <div class="code">CMYK(34, 6, 0, 0)</div>
+          </div>
+          
+          <div class="reference-color" style="background: var(--bs-verde-menta); color: #000;" onclick="copyColor('#B8FFEC')">
+            <h4>Verde Menta</h4>
+            <div class="code">#B8FFEC</div>
+            <div class="code">HSL(164°, 100%, 86%)</div>
+            <div class="code">CMYK(28, 0, 7, 0)</div>
+          </div>
+          
+          <div class="reference-color" style="background: var(--bs-cian-electrico); color: #000;" onclick="copyColor('#00F7FF')">
+            <h4>Cian Eléctrico</h4>
+            <div class="code">#00F7FF</div>
+            <div class="code">HSL(182°, 100%, 50%)</div>
+            <div class="code">CMYK(100, 3, 0, 0)</div>
+          </div>
+          
+          <div class="reference-color" style="background: var(--bs-rosa-pastel); color: #000;" onclick="copyColor('#FAD5FF')">
+            <h4>Rosa Pastel</h4>
+            <div class="code">#FAD5FF</div>
+            <div class="code">HSL(293°, 100%, 92%)</div>
+            <div class="code">CMYK(2, 16, 0, 0)</div>
+          </div>
+          
+          <div class="reference-color" style="background: var(--bs-violeta-neon); color: #fff;" onclick="copyColor('#C385FF')">
+            <h4>Violeta Neón</h4>
+            <div class="code">#C385FF</div>
+            <div class="code">HSL(264°, 100%, 76%)</div>
+            <div class="code">CMYK(24, 48, 0, 0)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECCIÓN 6: TIPOGRAFÍA OFICIAL === -->
+    <section class="section" id="tipografia-oficial">
+      <h2 class="section-title">Tipografía Oficial</h2>
+      <p class="section-subtitle">
+        Fuentes geométricas y futuristas que transmiten innovación tecnológica y precisión digital. 
+        Seleccionadas para complementar la estética sci-fi de la marca.
+      </p>
+      
+      <div class="typography-showcase">
+        <div class="font-example">
+          <div class="font-primary">Orbitron</div>
+          <p class="font-description">
+            Familia principal • Títulos, logotipos y elementos destacados • Pesos: 400, 600, 900
+          </p>
+        </div>
+        
+        <div class="font-example">
+          <div class="font-secondary">Exo 2</div>
+          <p class="font-description">
+            Familia secundaria • Subtítulos, párrafos y texto de apoyo • Pesos: 300, 400, 600
+          </p>
+        </div>
+        
+        <div class="font-example">
+          <div class="font-mono">Major Mono Display</div>
+          <p class="font-description">
+            Familia monoespaciada • Códigos, datos técnicos y elementos UI
+          </p>
+        </div>
+      </div>
+    </section>    <!-- === SECCIÓN 7: ESPECIFICACIONES TÉCNICAS === -->
+    <section class="section" id="especificaciones-tecnicas">
+      <h2 class="section-title">Especificaciones Técnicas</h2>
+      <div class="tech-specs">
+        <div class="spec-grid">
+          <div class="spec-item">
+            <h4>Texturas y Efectos Visuales</h4>
+            <ul>
+              <li>Superficies nacaradas con iridiscencia sutil</li>
+              <li>Brillos especulares tipo metal líquido</li>
+              <li>Patrones de interferencia óptica estilo CD</li>
+              <li>Elementos HUD: retículas y gráficos luminosos</li>
+              <li>Efectos glitch controlados para contenido audiovisual</li>
+              <li>Transparencias con refracción de luz</li>
+            </ul>
+          </div>
+          
+          <div class="spec-item">
+            <h4>Aplicaciones Recomendadas</h4>
+            <ul>
+              <li>Portadas de álbumes con fondos abstractos fluidos</li>
+              <li>Hero sections web con animaciones sutiles</li>
+              <li>Contenido para redes sociales (Reels, TikTok, Stories)</li>
+              <li>Visuales para streaming en vivo y presentaciones</li>
+              <li>Material promocional digital y merchandising</li>
+              <li>Interfaces de aplicaciones móviles y web</li>
+            </ul>
+          </div>
+          
+          <div class="spec-item">
+            <h4>Directrices de Implementación</h4>
+            <ul>
+              <li>Mantener coherencia cromática en todos los elementos</li>
+              <li>Priorizar composiciones abstractas y fluidas</li>
+              <li>Usar transparencias y reflejos de forma estratégica</li>
+              <li>Asegurar legibilidad en interfaces de usuario</li>
+              <li>Aplicar gradientes para crear profundidad visual</li>
+              <li>Respetar jerarquía tipográfica establecida</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SECCIÓN 8: CÓDIGO CSS OFICIAL === -->
+    <section class="section" id="codigo-css">
+      <h2 class="section-title">Variables CSS Oficiales</h2>
+      <p class="section-subtitle">
+        Código de implementación técnica para desarrolladores. 
+        Copiar y pegar directamente en proyectos web.
+      </p>
+      
+      <div class="code-export">
+        <pre>/* === BEATSUPPLIER BRAND COLORS === */
+:root {
+  /* Colores primarios */
+  --bs-azul-celeste: #A8EFFF;
+  --bs-verde-menta: #B8FFEC;
+  --bs-cian-electrico: #00F7FF;
+  
+  /* Acentos psicodélicos */
+  --bs-rosa-pastel: #FAD5FF;
+  --bs-violeta-neon: #C385FF;
+  
+  /* Colores de apoyo */
+  --bs-blanco-iridiscente: rgba(255, 255, 255, 0.4);
+  --bs-gris-perla: rgba(229, 229, 229, 0.25);
+  --bs-negro-hud: rgba(15, 15, 15, 0.85);
+  --bs-azul-petroleo: rgba(44, 62, 80, 0.75);
+  
+  /* Gradientes oficiales */
+  --bs-gradient-iris: linear-gradient(135deg, 
+    var(--bs-azul-celeste) 0%, 
+    var(--bs-rosa-pastel) 50%, 
+    var(--bs-verde-menta) 100%);
+  --bs-gradient-bruma: linear-gradient(90deg, 
+    rgba(195,133,255,0.8) 0%, 
+    rgba(0,247,255,0.85) 50%, 
+    rgba(168,239,255,0.75) 100%);
+  --bs-gradient-cristal: radial-gradient(circle at center, 
+    var(--bs-rosa-pastel) 0%, 
+    var(--bs-cian-electrico) 40%, 
+    var(--bs-azul-petroleo) 100%);
+  
+  /* Tipografías oficiales */
+  --bs-font-primary: 'Orbitron', 'Arial', sans-serif;
+  --bs-font-secondary: 'Exo 2', 'Helvetica', sans-serif;
+  --bs-font-mono: 'Major Mono Display', 'Courier New', monospace;
+}</pre>
+      </div>
+    </section>
+
+    <!-- === FOOTER CORPORATIVO === -->
+    <footer class="footer" id="footer">
+      <p class="copyright">© 2025 Beatsupplier • rom3.labs</p>
+      <p>Guía de Marca Visual Oficial</p>
+      <p style="margin-top: var(--bs-spacing-sm); font-size: 0.8rem; opacity: 0.7;">
+        Esta guía define los estándares oficiales de identidad visual para uso 
+        en todos los materiales de la marca Beatsupplier.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- === NOTIFICACIÓN DE COPIA === -->
+  <div class="copy-notification" id="copyNotification">
+    ✓ Color copiado al portapapeles
+  </div>
+
+  <script>
+    // === FUNCIONES DE INTERACCIÓN === //
+    
+    // Función para copiar colores al portapapeles
+    function copyColor(color) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(color).then(function() {
+          showNotification();
+        }).catch(function(err) {
+          console.error('Error al copiar: ', err);
+          fallbackCopyText(color);
+        });
+      } else {
+        fallbackCopyText(color);
+      }
+    }
+    
+    // Función de respaldo para copiar texto
+    function fallbackCopyText(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        showNotification();
+      } catch (err) {
+        console.error('Error al copiar: ', err);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+    
+    // Mostrar notificación de copia exitosa
+    function showNotification() {
+      const notification = document.getElementById('copyNotification');
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 2500);
+    }
+
+    // === MEJORAS DE ACCESIBILIDAD === //
+    
+    // Soporte para navegación por teclado
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const activeElement = document.activeElement;
+        if (activeElement.classList.contains('color-card') || 
+            activeElement.classList.contains('reference-color') ||
+            activeElement.classList.contains('gradient-item')) {
+          e.preventDefault();
+          activeElement.click();
+        }
+      }
+    });
+
+    // Hacer elementos interactivos accesibles con teclado
+    document.addEventListener('DOMContentLoaded', function() {
+      const interactiveElements = document.querySelectorAll('.color-card, .reference-color, .gradient-item');
+      interactiveElements.forEach(element => {
+        element.setAttribute('tabindex', '0');
+        element.setAttribute('role', 'button');
+        element.setAttribute('aria-label', 'Copiar color al portapapeles');
+      });
+    });
+
+  </script>
+
+</body>
+</html>

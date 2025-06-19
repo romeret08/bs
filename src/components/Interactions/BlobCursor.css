@@ -1,0 +1,62 @@
+.blob-cursor-filter {
+  width: 0;
+  height: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.blob-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.blob-cursor-container.visible {
+  opacity: 1;
+}
+
+.blob-cursor {
+  position: absolute;
+  will-change: transform;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blob-cursor.circle {
+  border-radius: 50%;
+}
+
+.blob-cursor-inner {
+  position: relative;
+  border-radius: inherit;
+  backdrop-filter: blur(10px);
+}
+
+/* Link hover effects */
+.blob-cursor-container.visible a:hover ~ .blob-cursor-container .blob-cursor {
+  background-color: var(--bs-rosa-pastel, #FAD5FF);
+  transform: scale(1.2);
+}
+
+.blob-cursor-container.visible button:hover ~ .blob-cursor-container .blob-cursor {
+  background-color: var(--bs-cian-electrico, #00F7FF);
+  transform: scale(0.8);
+}
+
+/* Responsive - disable on touch devices */
+@media (pointer: coarse) {
+  .blob-cursor-container {
+    display: none;
+  }
+}

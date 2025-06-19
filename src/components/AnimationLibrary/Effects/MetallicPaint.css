@@ -1,0 +1,110 @@
+.metallic-paint {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --delta-x: 0;
+  --delta-y: 0;
+  --intensity: 1;
+  
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.metallic-paint:hover {
+  transform: perspective(1000px) rotateX(calc(var(--delta-y) * -10deg)) rotateY(calc(var(--delta-x) * 10deg));
+}
+
+.metallic-paint-content {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    135deg,
+    #e8e8e8 0%,
+    #ffffff 25%,
+    #c0c0c0 50%,
+    #a8a8a8 75%,
+    #e8e8e8 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: metallicShine 3s ease-in-out infinite;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.metallic-paint-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.2) 30%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+}
+
+.metallic-paint:hover .metallic-paint-overlay {
+  opacity: calc(var(--intensity) * 1);
+}
+
+.metallic-paint:hover .metallic-paint-content {
+  animation-duration: 1s;
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.8),
+    0 0 30px rgba(255, 255, 255, 0.5),
+    0 0 45px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes metallicShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Enhanced metallic effect */
+.metallic-paint-content::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 70%
+  );
+  background-size: 20px 20px;
+  animation: metallicPattern 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.metallic-paint:hover .metallic-paint-content::before {
+  opacity: 0.3;
+}

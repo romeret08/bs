@@ -1,0 +1,64 @@
+.scroll-reveal-container {
+  margin: 2rem 0;
+  transform-origin: 0% 50%;
+  transform: rotate(var(--base-rotation));
+  transition: transform 1s ease-out;
+}
+
+.scroll-reveal-container.animate {
+  transform: rotate(0deg);
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+  font-family: var(--bs-font-secondary, 'Exo 2', Helvetica, sans-serif);
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+}
+
+.scroll-reveal-word {
+  display: inline-block;
+  opacity: var(--base-opacity);
+  filter: blur(var(--blur-strength));
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  will-change: opacity, filter, transform;
+}
+
+.scroll-reveal-container.animate .scroll-reveal-word {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+  animation: wordReveal 0.8s ease-out forwards;
+}
+
+@keyframes wordReveal {
+  0% {
+    opacity: var(--base-opacity);
+    filter: blur(var(--blur-strength));
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(calc(var(--blur-strength) / 2));
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+    text-shadow: 0 0 10px rgba(168, 239, 255, 0.3);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .scroll-reveal-text {
+    font-size: clamp(1.2rem, 6vw, 2.2rem);
+  }
+  
+  .scroll-reveal-container {
+    margin: 1.5rem 0;
+  }
+}

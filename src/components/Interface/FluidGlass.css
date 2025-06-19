@@ -1,0 +1,146 @@
+.fluid-glass {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, backdrop-filter, border-color;
+}
+
+.fluid-glass-content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+  font-family: var(--bs-font-secondary, 'Exo 2', Helvetica, sans-serif);
+}
+
+.fluid-glass-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* Hover state enhancements */
+.fluid-glass:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.fluid-glass.hovered {
+  border-color: rgba(168, 239, 255, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(168, 239, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Content styling */
+.fluid-glass h1,
+.fluid-glass h2,
+.fluid-glass h3,
+.fluid-glass h4 {
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.95));
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fluid-glass p {
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.fluid-glass .fluid-glass-title {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+  background: var(--bs-gradient-iris, linear-gradient(135deg, #A8EFFF 0%, #FAD5FF 50%, #B8FFEC 100%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+/* Navigation specific styling */
+.fluid-glass .nav-item {
+  padding: 0.75rem 1rem;
+  margin: 0.25rem 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.fluid-glass .nav-item:hover {
+  background: rgba(168, 239, 255, 0.1);
+  color: var(--bs-cian-electrico, #00F7FF);
+  text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+  transform: translateX(5px);
+}
+
+/* Menu/Header specific styling */
+.fluid-glass.menu {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+}
+
+.fluid-glass.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+/* Player specific styling */
+.fluid-glass.player {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  min-width: 300px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fluid-glass {
+    transform: none !important;
+  }
+  
+  .fluid-glass:hover {
+    transform: translateY(-1px) scale(1.01) !important;
+  }
+  
+  .fluid-glass-content {
+    padding: 1rem;
+  }
+  
+  .fluid-glass.menu,
+  .fluid-glass.player {
+    position: relative;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--bs-border-radius, 12px);
+  }
+}

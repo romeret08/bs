@@ -1,0 +1,3425 @@
+
+
+https://reactbits.dev/
+
+🔠 TEXT ANIMATIONS (para títulos, slogans, hero)
+✅ Glitch Text
+👉 Ideal para el logo animado o títulos como “BEATSUPPLIER” en la home. Refuerza la estética distorsionada/glitch sin ser invasiva.
+usage
+import GlitchText from './GlitchText';
+  
+<GlitchText
+  speed={1}
+  enableShadows={true}
+  enableOnHover={true}
+  className='custom-class'
+>
+  reactbits
+</GlitchText>
+code
+Default
+
+Tailwind
+
+import { FC, CSSProperties } from "react";
+
+interface GlitchTextProps {
+  children: string;
+  speed?: number;
+  enableShadows?: boolean;
+  enableOnHover?: boolean;
+  className?: string;
+}
+
+interface CustomCSSProperties extends CSSProperties {
+  "--after-duration": string;
+  "--before-duration": string;
+  "--after-shadow": string;
+  "--before-shadow": string;
+}
+
+const GlitchText: FC<GlitchTextProps> = ({
+  children,
+  speed = 0.5,
+  enableShadows = true,
+  enableOnHover = false,
+  className = "",
+}) => {
+  const inlineStyles: CustomCSSProperties = {
+    "--after-duration": `${speed * 3}s`,
+    "--before-duration": `${speed * 2}s`,
+    "--after-shadow": enableShadows ? "-5px 0 red" : "none",
+    "--before-shadow": enableShadows ? "5px 0 cyan" : "none",
+  };
+
+  const baseClasses =
+    "text-white text-[clamp(2rem,10vw,8rem)] font-black relative mx-auto select-none cursor-pointer";
+
+  const pseudoClasses = !enableOnHover
+    ? "after:content-[attr(data-text)] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:[text-shadow:var(--after-shadow)] after:animate-glitch-after " +
+      "before:content-[attr(data-text)] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:[text-shadow:var(--before-shadow)] before:animate-glitch-before"
+    : "after:content-[''] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:opacity-0 " +
+      "before:content-[''] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:opacity-0 " +
+      "hover:after:content-[attr(data-text)] hover:after:opacity-100 hover:after:[text-shadow:var(--after-shadow)] hover:after:animate-glitch-after " +
+      "hover:before:content-[attr(data-text)] hover:before:opacity-100 hover:before:[text-shadow:var(--before-shadow)] hover:before:animate-glitch-before";
+
+  const combinedClasses = `${baseClasses} ${pseudoClasses} ${className}`;
+
+  return (
+    <div style={inlineStyles} data-text={children} className={combinedClasses}>
+      {children}
+    </div>
+  );
+};
+
+export default GlitchText;
+
+// tailwind.config.js
+// module.exports = {
+//   theme: {
+//     extend: {
+//       keyframes: {
+//         glitch: {
+//           "0%": { "clip-path": "inset(20% 0 50% 0)" },
+//           "5%": { "clip-path": "inset(10% 0 60% 0)" },
+//           "10%": { "clip-path": "inset(15% 0 55% 0)" },
+//           "15%": { "clip-path": "inset(25% 0 35% 0)" },
+//           "20%": { "clip-path": "inset(30% 0 40% 0)" },
+//           "25%": { "clip-path": "inset(40% 0 20% 0)" },
+//           "30%": { "clip-path": "inset(10% 0 60% 0)" },
+//           "35%": { "clip-path": "inset(15% 0 55% 0)" },
+//           "40%": { "clip-path": "inset(25% 0 35% 0)" },
+//           "45%": { "clip-path": "inset(30% 0 40% 0)" },
+//           "50%": { "clip-path": "inset(20% 0 50% 0)" },
+//           "55%": { "clip-path": "inset(10% 0 60% 0)" },
+//           "60%": { "clip-path": "inset(15% 0 55% 0)" },
+//           "65%": { "clip-path": "inset(25% 0 35% 0)" },
+//           "70%": { "clip-path": "inset(30% 0 40% 0)" },
+//           "75%": { "clip-path": "inset(40% 0 20% 0)" },
+//           "80%": { "clip-path": "inset(20% 0 50% 0)" },
+//           "85%": { "clip-path": "inset(10% 0 60% 0)" },
+//           "90%": { "clip-path": "inset(15% 0 55% 0)" },
+//           "95%": { "clip-path": "inset(25% 0 35% 0)" },
+//           "100%": { "clip-path": "inset(30% 0 40% 0)" },
+//         },
+//       },
+//       animation: {
+//         "glitch-after": "glitch var(--after-duration) infinite linear alternate-reverse",
+//         "glitch-before": "glitch var(--before-duration) infinite linear alternate-reverse",
+//       },
+//     },
+//   },
+//   plugins: [],
+// };
+
+✅ Gradient Text
+👉 Perfecto para subtítulos destacados, nombres de colecciones o slogans (“No somos artistas, somos señales”). Refuerza los colores iridiscentes.
+usage
+import GradientText from './GradientText'
+  
+<GradientText
+  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+  animationSpeed={3}
+  showBorder={false}
+  className="custom-class"
+>
+  Add a splash of color!
+</GradientText>
+code
+Default
+
+Tailwind
+
+import React, { ReactNode } from 'react';
+
+interface GradientTextProps {
+    children: ReactNode;
+    className?: string;
+    colors?: string[];
+    animationSpeed?: number;
+    showBorder?: boolean;
+}
+
+export default function GradientText({
+    children,
+    className = "",
+    colors = ["#ffaa40", "#9c40ff", "#ffaa40"],
+    animationSpeed = 8,
+    showBorder = false,
+}: GradientTextProps) {
+    const gradientStyle = {
+        backgroundImage: `linear-gradient(to right, ${colors.join(", ")})`,
+        animationDuration: `${animationSpeed}s`,
+    };
+
+    return (
+        <div
+            className={`relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${className}`}
+        >
+            {showBorder && (
+                <div
+                    className="absolute inset-0 bg-cover z-0 pointer-events-none animate-gradient"
+                    style={{
+                        ...gradientStyle,
+                        backgroundSize: "300% 100%",
+                    }}
+                >
+                    <div
+                        className="absolute inset-0 bg-black rounded-[1.25rem] z-[-1]"
+                        style={{
+                            width: "calc(100% - 2px)",
+                            height: "calc(100% - 2px)",
+                            left: "50%",
+                            top: "50%",
+                            transform: "translate(-50%, -50%)",
+                        }}
+                    ></div>
+                </div>
+            )}
+            <div
+                className="inline-block relative z-2 text-transparent bg-cover animate-gradient"
+                style={{
+                    ...gradientStyle,
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    backgroundSize: "300% 100%",
+                }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+}
+
+// tailwind.config.js
+// module.exports = {
+//   theme: {
+//     extend: {
+//       keyframes: {
+//         gradient: {
+//           '0%': { backgroundPosition: '0% 50%' },
+//           '50%': { backgroundPosition: '100% 50%' },
+//           '100%': { backgroundPosition: '0% 50%' },
+//         },
+//       },
+//       animation: {
+//         gradient: 'gradient 8s linear infinite'
+//       },
+//     },
+//   },
+//   plugins: [],
+// };
+✅ Scramble Text
+👉 Para introducir títulos narrativos con efecto cifrado/deconstruido. Puede usarse en secciones tipo “Lore NFT” o “Manifiesto”.
+installation
+npm i gsap
+usage
+// Component inspired by Tom Miller from the GSAP community
+// https://codepen.io/creativeocean/pen/NPWLwJM
+
+import ScrambledText from './ScrambledText';
+  
+<ScrambledText
+  className="scrambled-text-demo"
+  radius={100}
+  duration={1.2}
+  speed={0.5}
+  scrambleChars={.:}
+>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+  Similique pariatur dignissimos porro eius quam doloremque 
+  et enim velit nobis maxime.
+</ScrambledText>
+code
+Default
+
+Tailwind
+
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+
+gsap.registerPlugin(SplitText, ScrambleTextPlugin);
+
+export interface ScrambledTextProps {
+  radius?: number;
+  duration?: number;
+  speed?: number;
+  scrambleChars?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+}
+
+const ScrambledText: React.FC<ScrambledTextProps> = ({
+  radius = 100,
+  duration = 1.2,
+  speed = 0.5,
+  scrambleChars = ".:",
+  className = "",
+  style = {},
+  children,
+}) => {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+
+    const split = SplitText.create(rootRef.current.querySelector("p"), {
+      type: "chars",
+      charsClass: "inline-block will-change-transform",
+    });
+
+    split.chars.forEach((el) => {
+      const c = el as HTMLElement;
+      gsap.set(c, { attr: { "data-content": c.innerHTML } });
+    });
+
+    const handleMove = (e: PointerEvent) => {
+      split.chars.forEach((el) => {
+        const c = el as HTMLElement;
+        const { left, top, width, height } = c.getBoundingClientRect();
+        const dx = e.clientX - (left + width / 2);
+        const dy = e.clientY - (top + height / 2);
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < radius) {
+          gsap.to(c, {
+            overwrite: true,
+            duration: duration * (1 - dist / radius),
+            scrambleText: {
+              text: c.dataset.content || "",
+              chars: scrambleChars,
+              speed,
+            },
+            ease: "none",
+          });
+        }
+      });
+    };
+
+    const el = rootRef.current;
+    el.addEventListener("pointermove", handleMove);
+
+    return () => {
+      el.removeEventListener("pointermove", handleMove);
+      split.revert();
+    };
+  }, [radius, duration, speed, scrambleChars]);
+
+  return (
+    <div
+      ref={rootRef}
+      className={`m-[7vw] max-w-[800px] font-mono text-[clamp(14px,4vw,32px)] text-white ${className}`}
+      style={style}
+    >
+      <p>{children}</p>
+    </div>
+  );
+};
+
+export default ScrambledText;
+
+✅ Scroll Reveal / Scroll Float
+👉 Para que los bloques de contenido entren con suavidad mientras haces scroll. Ideal para la sección de historia o manifiesto.
+installation
+npm i gsap
+usage
+import ScrollReveal from './ScrollReveal';
+
+<ScrollReveal
+  baseOpacity={0}
+  enableBlur={true}
+  baseRotation={5}
+  blurStrength={10}
+>
+  When does a man die? When he is hit by a bullet? No! When he suffers a disease?
+  No! When he ate a soup made out of a poisonous mushroom?
+  No! A man dies when he is forgotten!
+</ScrollReveal>
+code
+Default
+
+Tailwind
+
+import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface ScrollRevealProps {
+  children: ReactNode;
+  scrollContainerRef?: RefObject<HTMLElement>;
+  enableBlur?: boolean;
+  baseOpacity?: number;
+  baseRotation?: number;
+  blurStrength?: number;
+  containerClassName?: string;
+  textClassName?: string;
+  rotationEnd?: string;
+  wordAnimationEnd?: string;
+}
+
+const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  scrollContainerRef,
+  enableBlur = true,
+  baseOpacity = 0.1,
+  baseRotation = 3,
+  blurStrength = 4,
+  containerClassName = "",
+  textClassName = "",
+  rotationEnd = "bottom bottom",
+  wordAnimationEnd = "bottom bottom",
+}) => {
+  const containerRef = useRef<HTMLHeadingElement>(null);
+
+  const splitText = useMemo(() => {
+    const text = typeof children === "string" ? children : "";
+    return text.split(/(\s+)/).map((word, index) => {
+      if (word.match(/^\s+$/)) return word;
+      return (
+        <span className="inline-block" key={index}>
+          {word}
+        </span>
+      );
+    });
+  }, [children]);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const scroller =
+      scrollContainerRef && scrollContainerRef.current
+        ? scrollContainerRef.current
+        : window;
+
+    gsap.fromTo(
+      el,
+      { transformOrigin: "0% 50%", rotate: baseRotation },
+      {
+        ease: "none",
+        rotate: 0,
+        scrollTrigger: {
+          trigger: el,
+          scroller,
+          start: "top bottom",
+          end: rotationEnd,
+          scrub: true,
+        },
+      }
+    );
+
+    const wordElements = el.querySelectorAll<HTMLElement>(".word");
+
+    gsap.fromTo(
+      wordElements,
+      { opacity: baseOpacity, willChange: "opacity" },
+      {
+        ease: "none",
+        opacity: 1,
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: el,
+          scroller,
+          start: "top bottom-=20%",
+          end: wordAnimationEnd,
+          scrub: true,
+        },
+      }
+    );
+
+    if (enableBlur) {
+      gsap.fromTo(
+        wordElements,
+        { filter: `blur(${blurStrength}px)` },
+        {
+          ease: "none",
+          filter: "blur(0px)",
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: el,
+            scroller,
+            start: "top bottom-=20%",
+            end: wordAnimationEnd,
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [
+    scrollContainerRef,
+    enableBlur,
+    baseRotation,
+    baseOpacity,
+    rotationEnd,
+    wordAnimationEnd,
+    blurStrength,
+  ]);
+
+  return (
+    <h2 ref={containerRef} className={`my-5 ${containerClassName}`}>
+      <p
+        className={`text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] font-semibold ${textClassName}`}
+      >
+        {splitText}
+      </p>
+    </h2>
+  );
+};
+
+export default ScrollReveal;
+✅ Decrypted Text
+👉 Excelente para presentar nombres de beats o códigos como v01.04. Añade un aire misterioso y técnico.
+installation
+npm i framer-motion
+usage
+import DecryptedText from './DecryptedText';
+
+{/* Example 1: Defaults (hover to decrypt) */}
+<DecryptedText text="Hover me!" />
+
+{/* Example 2: Customized speed and characters */}
+<DecryptedText
+text="Customize me"
+speed={100}
+maxIterations={20}
+characters="ABCD1234!?"
+className="revealed"
+parentClassName="all-letters"
+encryptedClassName="encrypted"
+/>
+
+{/* Example 3: Animate on view (runs once) */}
+<div style={{ marginTop: '4rem' }}>
+<DecryptedText
+  text="This text animates when in view"
+  animateOn="view"
+  revealDirection="center"
+/>
+</div>
+code
+Default
+
+Tailwind
+
+import { useEffect, useState, useRef } from 'react'
+import { motion, HTMLMotionProps } from 'framer-motion'
+
+interface DecryptedTextProps extends HTMLMotionProps<'span'> {
+    text: string
+    speed?: number
+    maxIterations?: number
+    sequential?: boolean
+    revealDirection?: 'start' | 'end' | 'center'
+    useOriginalCharsOnly?: boolean
+    characters?: string
+    className?: string
+    encryptedClassName?: string
+    parentClassName?: string
+    animateOn?: 'view' | 'hover'
+}
+
+export default function DecryptedText({
+    text,
+    speed = 50,
+    maxIterations = 10,
+    sequential = false,
+    revealDirection = 'start',
+    useOriginalCharsOnly = false,
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+',
+    className = '',
+    parentClassName = '',
+    encryptedClassName = '',
+    animateOn = 'hover',
+    ...props
+}: DecryptedTextProps) {
+    const [displayText, setDisplayText] = useState<string>(text)
+    const [isHovering, setIsHovering] = useState<boolean>(false)
+    const [isScrambling, setIsScrambling] = useState<boolean>(false)
+    const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set())
+    const [hasAnimated, setHasAnimated] = useState<boolean>(false)
+    const containerRef = useRef<HTMLSpanElement>(null)
+
+    useEffect(() => {
+        let interval: NodeJS.Timeout
+        let currentIteration = 0
+
+        const getNextIndex = (revealedSet: Set<number>): number => {
+            const textLength = text.length
+            switch (revealDirection) {
+                case 'start':
+                    return revealedSet.size
+                case 'end':
+                    return textLength - 1 - revealedSet.size
+                case 'center': {
+                    const middle = Math.floor(textLength / 2)
+                    const offset = Math.floor(revealedSet.size / 2)
+                    const nextIndex =
+                        revealedSet.size % 2 === 0
+                            ? middle + offset
+                            : middle - offset - 1
+
+                    if (nextIndex >= 0 && nextIndex < textLength && !revealedSet.has(nextIndex)) {
+                        return nextIndex
+                    }
+                    for (let i = 0; i < textLength; i++) {
+                        if (!revealedSet.has(i)) return i
+                    }
+                    return 0
+                }
+                default:
+                    return revealedSet.size
+            }
+        }
+
+        const availableChars = useOriginalCharsOnly
+            ? Array.from(new Set(text.split(''))).filter((char) => char !== ' ')
+            : characters.split('')
+
+        const shuffleText = (originalText: string, currentRevealed: Set<number>): string => {
+            if (useOriginalCharsOnly) {
+                const positions = originalText.split('').map((char, i) => ({
+                    char,
+                    isSpace: char === ' ',
+                    index: i,
+                    isRevealed: currentRevealed.has(i),
+                }))
+
+                const nonSpaceChars = positions
+                    .filter((p) => !p.isSpace && !p.isRevealed)
+                    .map((p) => p.char)
+
+                for (let i = nonSpaceChars.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1))
+                        ;[nonSpaceChars[i], nonSpaceChars[j]] = [nonSpaceChars[j], nonSpaceChars[i]]
+                }
+
+                let charIndex = 0
+                return positions
+                    .map((p) => {
+                        if (p.isSpace) return ' '
+                        if (p.isRevealed) return originalText[p.index]
+                        return nonSpaceChars[charIndex++]
+                    })
+                    .join('')
+            } else {
+                return originalText
+                    .split('')
+                    .map((char, i) => {
+                        if (char === ' ') return ' '
+                        if (currentRevealed.has(i)) return originalText[i]
+                        return availableChars[Math.floor(Math.random() * availableChars.length)]
+                    })
+                    .join('')
+            }
+        }
+
+        if (isHovering) {
+            setIsScrambling(true)
+            interval = setInterval(() => {
+                setRevealedIndices((prevRevealed) => {
+                    if (sequential) {
+                        if (prevRevealed.size < text.length) {
+                            const nextIndex = getNextIndex(prevRevealed)
+                            const newRevealed = new Set(prevRevealed)
+                            newRevealed.add(nextIndex)
+                            setDisplayText(shuffleText(text, newRevealed))
+                            return newRevealed
+                        } else {
+                            clearInterval(interval)
+                            setIsScrambling(false)
+                            return prevRevealed
+                        }
+                    } else {
+                        setDisplayText(shuffleText(text, prevRevealed))
+                        currentIteration++
+                        if (currentIteration >= maxIterations) {
+                            clearInterval(interval)
+                            setIsScrambling(false)
+                            setDisplayText(text)
+                        }
+                        return prevRevealed
+                    }
+                })
+            }, speed)
+        } else {
+            setDisplayText(text)
+            setRevealedIndices(new Set())
+            setIsScrambling(false)
+        }
+
+        return () => {
+            if (interval) clearInterval(interval)
+        }
+    }, [
+        isHovering,
+        text,
+        speed,
+        maxIterations,
+        sequential,
+        revealDirection,
+        characters,
+        useOriginalCharsOnly,
+    ])
+
+    useEffect(() => {
+        if (animateOn !== 'view') return
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setIsHovering(true)
+                    setHasAnimated(true)
+                }
+            })
+        }
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+        }
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions)
+        const currentRef = containerRef.current
+        if (currentRef) {
+            observer.observe(currentRef)
+        }
+
+        return () => {
+            if (currentRef) observer.unobserve(currentRef)
+        }
+    }, [animateOn, hasAnimated])
+
+    const hoverProps =
+        animateOn === 'hover'
+            ? {
+                onMouseEnter: () => setIsHovering(true),
+                onMouseLeave: () => setIsHovering(false),
+            }
+            : {}
+
+    return (
+        <motion.span
+            ref={containerRef}
+            className={`inline-block whitespace-pre-wrap ${parentClassName}`}
+            {...hoverProps}
+            {...props}
+        >
+            <span className="sr-only">{displayText}</span>
+
+            <span aria-hidden="true">
+                {displayText.split('').map((char, index) => {
+                    const isRevealedOrDone =
+                        revealedIndices.has(index) || !isScrambling || !isHovering
+
+                    return (
+                        <span
+                            key={index}
+                            className={isRevealedOrDone ? className : encryptedClassName}
+                        >
+                            {char}
+                        </span>
+                    )
+                })}
+            </span>
+        </motion.span>
+    )
+}
+
+
+✨ ANIMATIONS (backgrounds, efectos, interacción)
+✅ Glare Hover
+👉 En tarjetas de beats, prendas o NFTs. Agrega un efecto de brillo especular líquido al pasar el ratón. Muy iridiscente.
+usage
+import GlareHover from './GlareHover'
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <GlareHover
+    glareColor="#ffffff"
+    glareOpacity={0.3}
+    glareAngle={-30}
+    glareSize={300}
+    transitionDuration={800}
+    playOnce={false}
+  >
+    <h2 style={{ fontSize: '3rem', fontWeight: '900', color: '#333', margin: 0 }}>
+      Hover Me
+    </h2>
+  </GlareHover>
+</div>
+code
+Default
+
+Tailwind
+
+import React, { useRef } from "react";
+
+interface GlareHoverProps {
+  width?: string;
+  height?: string;
+  background?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  children?: React.ReactNode;
+  glareColor?: string;
+  glareOpacity?: number;
+  glareAngle?: number;
+  glareSize?: number;
+  transitionDuration?: number;
+  playOnce?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const GlareHover: React.FC<GlareHoverProps> = ({
+  width = "500px",
+  height = "500px",
+  background = "#000",
+  borderRadius = "10px",
+  borderColor = "#333",
+  children,
+  glareColor = "#ffffff",
+  glareOpacity = 0.5,
+  glareAngle = -45,
+  glareSize = 250,
+  transitionDuration = 650,
+  playOnce = false,
+  className = "",
+  style = {},
+}) => {
+  const hex = glareColor.replace("#", "");
+  let rgba = glareColor;
+  if (/^[\dA-Fa-f]{6}$/.test(hex)) {
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+    rgba = `rgba(${r}, ${g}, ${b}, ${glareOpacity})`;
+  } else if (/^[\dA-Fa-f]{3}$/.test(hex)) {
+    const r = parseInt(hex[0] + hex[0], 16);
+    const g = parseInt(hex[1] + hex[1], 16);
+    const b = parseInt(hex[2] + hex[2], 16);
+    rgba = `rgba(${r}, ${g}, ${b}, ${glareOpacity})`;
+  }
+
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+
+  const animateIn = () => {
+    const el = overlayRef.current;
+    if (!el) return;
+
+    el.style.transition = "none";
+    el.style.backgroundPosition = "-100% -100%, 0 0";
+    el.offsetHeight;
+    el.style.transition = `${transitionDuration}ms ease`;
+    el.style.backgroundPosition = "100% 100%, 0 0";
+  };
+
+  const animateOut = () => {
+    const el = overlayRef.current;
+    if (!el) return;
+
+    if (playOnce) {
+      el.style.transition = "none";
+      el.style.backgroundPosition = "-100% -100%, 0 0";
+    } else {
+      el.style.transition = `${transitionDuration}ms ease`;
+      el.style.backgroundPosition = "-100% -100%, 0 0";
+    }
+  };
+
+  const overlayStyle: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    background: `linear-gradient(${glareAngle}deg,
+        hsla(0,0%,0%,0) 60%,
+        ${rgba} 70%,
+        hsla(0,0%,0%,0) 100%)`,
+    backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "-100% -100%, 0 0",
+    pointerEvents: "none",
+  };
+
+  return (
+    <div
+      className={`relative grid place-items-center overflow-hidden border cursor-pointer ${className}`}
+      style={{
+        width,
+        height,
+        background,
+        borderRadius,
+        borderColor,
+        ...style,
+      }}
+      onMouseEnter={animateIn}
+      onMouseLeave={animateOut}
+    >
+      <div ref={overlayRef} style={overlayStyle} />
+      {children}
+    </div>
+  );
+};
+
+export default GlareHover;
+
+✅ Noise
+👉 Añadir ruido visual sutil al fondo le da textura sin romper la claridad. Queda genial como capa de profundidad.
+usage
+import Noise from './Noise;'
+
+<div style={{width: '600px', height: '400px', position: 'relative', overflow: 'hidden'}}>
+  <Noise
+    patternSize={250}
+    patternScaleX={1}
+    patternScaleY={1}
+    patternRefreshInterval={2}
+    patternAlpha={15}
+  />
+</div>
+code
+Default
+
+Tailwind
+
+import React, { useRef, useEffect } from "react";
+
+interface NoiseProps {
+  patternSize?: number;
+  patternScaleX?: number;
+  patternScaleY?: number;
+  patternRefreshInterval?: number;
+  patternAlpha?: number;
+}
+
+const Noise: React.FC<NoiseProps> = ({
+  patternSize = 250,
+  patternScaleX = 1,
+  patternScaleY = 1,
+  patternRefreshInterval = 2,
+  patternAlpha = 15,
+}) => {
+  const grainRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = grainRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let frame = 0;
+
+    const patternCanvas = document.createElement("canvas");
+    patternCanvas.width = patternSize;
+    patternCanvas.height = patternSize;
+    const patternCtx = patternCanvas.getContext("2d");
+    if (!patternCtx) return;
+
+    const patternData = patternCtx.createImageData(patternSize, patternSize);
+    const patternPixelDataLength = patternSize * patternSize * 4;
+
+    const resize = () => {
+      if (!canvas) return;
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+
+      ctx.scale(patternScaleX, patternScaleY);
+    };
+
+    const updatePattern = () => {
+      for (let i = 0; i < patternPixelDataLength; i += 4) {
+        const value = Math.random() * 255;
+        patternData.data[i] = value;
+        patternData.data[i + 1] = value;
+        patternData.data[i + 2] = value;
+        patternData.data[i + 3] = patternAlpha;
+      }
+      patternCtx.putImageData(patternData, 0, 0);
+    };
+
+    const drawGrain = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const pattern = ctx.createPattern(patternCanvas, "repeat");
+      if (pattern) {
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+    };
+
+    const loop = () => {
+      if (frame % patternRefreshInterval === 0) {
+        updatePattern();
+        drawGrain();
+      }
+      frame++;
+      window.requestAnimationFrame(loop);
+    };
+
+    window.addEventListener("resize", resize);
+    resize();
+    loop();
+
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [patternSize, patternScaleX, patternScaleY, patternRefreshInterval, patternAlpha]);
+
+  return <canvas className="absolute left-0 top-0 w-screen h-screen" ref={grainRef} />;
+};
+
+export default Noise;
+✅ Magnet
+👉 Para botones de CTA o links (ej. “Escucha”, “Compra”, “Mint”). El cursor se siente atraído suavemente. Futurista y reactivo.
+usage
+import Magnet from './Magnet'
+
+<Magnet padding={50} disabled={false} magnetStrength={50}>
+  <p>Star React Bits on GitHub!</p>
+</Magnet>
+code
+Default
+
+Tailwind
+
+import React, { useState, useEffect, useRef, ReactNode, HTMLAttributes } from "react";
+
+interface MagnetProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  padding?: number;
+  disabled?: boolean;
+  magnetStrength?: number;
+  activeTransition?: string;
+  inactiveTransition?: string;
+  wrapperClassName?: string;
+  innerClassName?: string;
+}
+
+const Magnet: React.FC<MagnetProps> = ({
+  children,
+  padding = 100,
+  disabled = false,
+  magnetStrength = 2,
+  activeTransition = "transform 0.3s ease-out",
+  inactiveTransition = "transform 0.5s ease-in-out",
+  wrapperClassName = "",
+  innerClassName = "",
+  ...props
+}) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const magnetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (disabled) {
+      setPosition({ x: 0, y: 0 });
+      return;
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!magnetRef.current) return;
+
+      const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+
+      const distX = Math.abs(centerX - e.clientX);
+      const distY = Math.abs(centerY - e.clientY);
+
+      if (distX < width / 2 + padding && distY < height / 2 + padding) {
+        setIsActive(true);
+        const offsetX = (e.clientX - centerX) / magnetStrength;
+        const offsetY = (e.clientY - centerY) / magnetStrength;
+        setPosition({ x: offsetX, y: offsetY });
+      } else {
+        setIsActive(false);
+        setPosition({ x: 0, y: 0 });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [padding, disabled, magnetStrength]);
+
+  const transitionStyle = isActive ? activeTransition : inactiveTransition;
+
+  return (
+    <div
+      ref={magnetRef}
+      className={wrapperClassName}
+      style={{ position: "relative", display: "inline-block" }}
+      {...props}
+    >
+      <div
+        className={innerClassName}
+        style={{
+          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+          transition: transitionStyle,
+          willChange: "transform",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default Magnet;
+
+✅ Metallic Paint
+👉 Efecto visual premium para elementos importantes (como el logo animado o un botón de mint NFT).
+usage
+import MetallicPaint, { parseLogoImage } from "./MetallicPaint";
+import { useState, useEffect } from 'react';
+
+// replace with your own SVG
+// NOTE: your SVG should have a bit of padding around the shape, to keep it from being cut off
+// it should also have black fill color, to allow the metallic effect to show through the mask
+import logo from '../../assets/logos/react-bits-logo-small-black.svg';
+
+const Component = () => {
+  const [imageData, setImageData] = useState<ImageData | null>(null);
+
+  useEffect(() => {
+    async function loadDefaultImage() {
+      try {
+        const response = await fetch(logo);
+        const blob = await response.blob();
+        const file = new File([blob], "default.png", { type: blob.type });
+
+        const parsedData = await parseLogoImage(file);
+        setImageData(parsedData?.imageData ?? null);
+
+      } catch (err) {
+        console.error("Error loading default image:", err);
+      }
+    }
+
+    loadDefaultImage();
+  }, []);
+
+  return (
+    <div style={{ width: '100%', height: '100vh' }}>
+      <MetallicPaint 
+        imageData={imageData ?? new ImageData(1, 1)} 
+        params={{ edge: 2, patternBlur: 0.005, patternScale: 2, refraction: 0.015, speed: 0.3, liquid: 0.07 }} 
+      />
+    </div>
+  );
+}
+code
+Default
+
+Tailwind
+
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const defaultParams = {
+  patternScale: 2,
+  refraction: 0.015,
+  edge: 1,
+  patternBlur: 0.005,
+  liquid: 0.07,
+  speed: 0.3,
+};
+
+export function parseLogoImage(
+  file
+) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  return new Promise((resolve, reject) => {
+    if (!file || !ctx) {
+      reject(new Error("Invalid file or context"));
+      return;
+    }
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function () {
+      if (file.type === "image/svg+xml") {
+        img.width = 1000;
+        img.height = 1000;
+      }
+
+      const MAX_SIZE = 1000;
+      const MIN_SIZE = 500;
+      let width = img.naturalWidth;
+      let height = img.naturalHeight;
+
+      if (width > MAX_SIZE || height > MAX_SIZE || width < MIN_SIZE || height < MIN_SIZE) {
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height = Math.round((height * MAX_SIZE) / width);
+            width = MAX_SIZE;
+          } else if (width < MIN_SIZE) {
+            height = Math.round((height * MIN_SIZE) / width);
+            width = MIN_SIZE;
+          }
+        } else {
+          if (height > MAX_SIZE) {
+            width = Math.round((width * MAX_SIZE) / height);
+            height = MAX_SIZE;
+          } else if (height < MIN_SIZE) {
+            width = Math.round((width * MIN_SIZE) / height);
+            height = MIN_SIZE;
+          }
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const shapeCanvas = document.createElement("canvas");
+      shapeCanvas.width = width;
+      shapeCanvas.height = height;
+      const shapeCtx = shapeCanvas.getContext("2d");
+      shapeCtx.drawImage(img, 0, 0, width, height);
+
+      const shapeImageData = shapeCtx.getImageData(0, 0, width, height);
+      const data = shapeImageData.data;
+      const shapeMask = new Array(width * height).fill(false);
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx4 = (y * width + x) * 4;
+          const r = data[idx4];
+          const g = data[idx4 + 1];
+          const b = data[idx4 + 2];
+          const a = data[idx4 + 3];
+          shapeMask[y * width + x] = !(
+            (r === 255 && g === 255 && b === 255 && a === 255) ||
+            a === 0
+          );
+        }
+      }
+
+      function inside(x, y) {
+        if (x < 0 || x >= width || y < 0 || y >= height) return false;
+        return shapeMask[y * width + x];
+      }
+
+      const boundaryMask = new Array(width * height).fill(false);
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = y * width + x;
+          if (!shapeMask[idx]) continue;
+          let isBoundary = false;
+          for (let ny = y - 1; ny <= y + 1 && !isBoundary; ny++) {
+            for (let nx = x - 1; nx <= x + 1 && !isBoundary; nx++) {
+              if (!inside(nx, ny)) {
+                isBoundary = true;
+              }
+            }
+          }
+          if (isBoundary) {
+            boundaryMask[idx] = true;
+          }
+        }
+      }
+
+      const interiorMask = new Array(width * height).fill(false);
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const idx = y * width + x;
+          if (
+            shapeMask[idx] &&
+            shapeMask[idx - 1] &&
+            shapeMask[idx + 1] &&
+            shapeMask[idx - width] &&
+            shapeMask[idx + width]
+          ) {
+            interiorMask[idx] = true;
+          }
+        }
+      }
+
+      const u = new Float32Array(width * height).fill(0);
+      const newU = new Float32Array(width * height).fill(0);
+      const C = 0.01;
+      const ITERATIONS = 300;
+
+      function getU(x, y, arr) {
+        if (x < 0 || x >= width || y < 0 || y >= height) return 0;
+        if (!shapeMask[y * width + x]) return 0;
+        return arr[y * width + x];
+      }
+
+      for (let iter = 0; iter < ITERATIONS; iter++) {
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const idx = y * width + x;
+            if (!shapeMask[idx] || boundaryMask[idx]) {
+              newU[idx] = 0;
+              continue;
+            }
+            const sumN =
+              getU(x + 1, y, u) + getU(x - 1, y, u) + getU(x, y + 1, u) + getU(x, y - 1, u);
+            newU[idx] = (C + sumN) / 4;
+          }
+        }
+        u.set(newU);
+      }
+
+      let maxVal = 0;
+      for (let i = 0; i < width * height; i++) {
+        if (u[i] > maxVal) maxVal = u[i];
+      }
+      const alpha = 2.0;
+      const outImg = ctx.createImageData(width, height);
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = y * width + x;
+          const px = idx * 4;
+          if (!shapeMask[idx]) {
+            outImg.data[px] = 255;
+            outImg.data[px + 1] = 255;
+            outImg.data[px + 2] = 255;
+            outImg.data[px + 3] = 255;
+          } else {
+            const raw = u[idx] / maxVal;
+            const remapped = Math.pow(raw, alpha);
+            const gray = 255 * (1 - remapped);
+            outImg.data[px] = gray;
+            outImg.data[px + 1] = gray;
+            outImg.data[px + 2] = gray;
+            outImg.data[px + 3] = 255;
+          }
+        }
+      }
+
+      ctx.putImageData(outImg, 0, 0);
+
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error("Failed to create PNG blob"));
+          return;
+        }
+        resolve({
+          imageData: outImg,
+          pngBlob: blob,
+        });
+      }, "image/png");
+    };
+
+    img.onerror = () => reject(new Error("Failed to load image"));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+const vertexShaderSource = `#version 300 es
+precision mediump float;
+
+in vec2 a_position;
+out vec2 vUv;
+
+void main() {
+    vUv = .5 * (a_position + 1.);
+    gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+
+const liquidFragSource = `#version 300 es
+precision mediump float;
+
+in vec2 vUv;
+out vec4 fragColor;
+
+uniform sampler2D u_image_texture;
+uniform float u_time;
+uniform float u_ratio;
+uniform float u_img_ratio;
+uniform float u_patternScale;
+uniform float u_refraction;
+uniform float u_edge;
+uniform float u_patternBlur;
+uniform float u_liquid;
+
+#define TWO_PI 6.28318530718
+#define PI 3.14159265358979323846
+
+vec3 mod289(vec3 x) { return x - floor(x * (1. / 289.)) * 289.; }
+vec2 mod289(vec2 x) { return x - floor(x * (1. / 289.)) * 289.; }
+vec3 permute(vec3 x) { return mod289(((x*34.)+1.)*x); }
+float snoise(vec2 v) {
+    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+    vec2 i = floor(v + dot(v, C.yy));
+    vec2 x0 = v - i + dot(i, C.xx);
+    vec2 i1;
+    i1 = (x0.x > x0.y) ? vec2(1., 0.) : vec2(0., 1.);
+    vec4 x12 = x0.xyxy + C.xxzz;
+    x12.xy -= i1;
+    i = mod289(i);
+    vec3 p = permute(permute(i.y + vec3(0., i1.y, 1.)) + i.x + vec3(0., i1.x, 1.));
+    vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.);
+    m = m*m;
+    m = m*m;
+    vec3 x = 2. * fract(p * C.www) - 1.;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+    vec3 g;
+    g.x = a0.x * x0.x + h.x * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130. * dot(m, g);
+}
+
+vec2 get_img_uv() {
+    vec2 img_uv = vUv;
+    img_uv -= .5;
+    if (u_ratio > u_img_ratio) {
+        img_uv.x = img_uv.x * u_ratio / u_img_ratio;
+    } else {
+        img_uv.y = img_uv.y * u_img_ratio / u_ratio;
+    }
+    float scale_factor = 1.;
+    img_uv *= scale_factor;
+    img_uv += .5;
+    img_uv.y = 1. - img_uv.y;
+    return img_uv;
+}
+vec2 rotate(vec2 uv, float th) {
+    return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+}
+float get_color_channel(float c1, float c2, float stripe_p, vec3 w, float extra_blur, float b) {
+    float ch = c2;
+    float border = 0.;
+    float blur = u_patternBlur + extra_blur;
+    ch = mix(ch, c1, smoothstep(.0, blur, stripe_p));
+    border = w[0];
+    ch = mix(ch, c2, smoothstep(border - blur, border + blur, stripe_p));
+    b = smoothstep(.2, .8, b);
+    border = w[0] + .4 * (1. - b) * w[1];
+    ch = mix(ch, c1, smoothstep(border - blur, border + blur, stripe_p));
+    border = w[0] + .5 * (1. - b) * w[1];
+    ch = mix(ch, c2, smoothstep(border - blur, border + blur, stripe_p));
+    border = w[0] + w[1];
+    ch = mix(ch, c1, smoothstep(border - blur, border + blur, stripe_p));
+    float gradient_t = (stripe_p - w[0] - w[1]) / w[2];
+    float gradient = mix(c1, c2, smoothstep(0., 1., gradient_t));
+    ch = mix(ch, gradient, smoothstep(border - blur, border + blur, stripe_p));
+    return ch;
+}
+float get_img_frame_alpha(vec2 uv, float img_frame_width) {
+    float img_frame_alpha = smoothstep(0., img_frame_width, uv.x) * smoothstep(1., 1. - img_frame_width, uv.x);
+    img_frame_alpha *= smoothstep(0., img_frame_width, uv.y) * smoothstep(1., 1. - img_frame_width, uv.y);
+    return img_frame_alpha;
+}
+void main() {
+    vec2 uv = vUv;
+    uv.y = 1. - uv.y;
+    uv.x *= u_ratio;
+    float diagonal = uv.x - uv.y;
+    float t = .001 * u_time;
+    vec2 img_uv = get_img_uv();
+    vec4 img = texture(u_image_texture, img_uv);
+    vec3 color = vec3(0.);
+    float opacity = 1.;
+    vec3 color1 = vec3(.98, 0.98, 1.);
+    vec3 color2 = vec3(.1, .1, .1 + .1 * smoothstep(.7, 1.3, uv.x + uv.y));
+    float edge = img.r;
+    vec2 grad_uv = uv;
+    grad_uv -= .5;
+    float dist = length(grad_uv + vec2(0., .2 * diagonal));
+    grad_uv = rotate(grad_uv, (.25 - .2 * diagonal) * PI);
+    float bulge = pow(1.8 * dist, 1.2);
+    bulge = 1. - bulge;
+    bulge *= pow(uv.y, .3);
+    float cycle_width = u_patternScale;
+    float thin_strip_1_ratio = .12 / cycle_width * (1. - .4 * bulge);
+    float thin_strip_2_ratio = .07 / cycle_width * (1. + .4 * bulge);
+    float wide_strip_ratio = (1. - thin_strip_1_ratio - thin_strip_2_ratio);
+    float thin_strip_1_width = cycle_width * thin_strip_1_ratio;
+    float thin_strip_2_width = cycle_width * thin_strip_2_ratio;
+    opacity = 1. - smoothstep(.9 - .5 * u_edge, 1. - .5 * u_edge, edge);
+    opacity *= get_img_frame_alpha(img_uv, 0.01);
+    float noise = snoise(uv - t);
+    edge += (1. - edge) * u_liquid * noise;
+    float refr = 0.;
+    refr += (1. - bulge);
+    refr = clamp(refr, 0., 1.);
+    float dir = grad_uv.x;
+    dir += diagonal;
+    dir -= 2. * noise * diagonal * (smoothstep(0., 1., edge) * smoothstep(1., 0., edge));
+    bulge *= clamp(pow(uv.y, .1), .3, 1.);
+    dir *= (.1 + (1.1 - edge) * bulge);
+    dir *= smoothstep(1., .7, edge);
+    dir += .18 * (smoothstep(.1, .2, uv.y) * smoothstep(.4, .2, uv.y));
+    dir += .03 * (smoothstep(.1, .2, 1. - uv.y) * smoothstep(.4, .2, 1. - uv.y));
+    dir *= (.5 + .5 * pow(uv.y, 2.));
+    dir *= cycle_width;
+    dir -= t;
+    float refr_r = refr;
+    refr_r += .03 * bulge * noise;
+    float refr_b = 1.3 * refr;
+    refr_r += 5. * (smoothstep(-.1, .2, uv.y) * smoothstep(.5, .1, uv.y)) * (smoothstep(.4, .6, bulge) * smoothstep(1., .4, bulge));
+    refr_r -= diagonal;
+    refr_b += (smoothstep(0., .4, uv.y) * smoothstep(.8, .1, uv.y)) * (smoothstep(.4, .6, bulge) * smoothstep(.8, .4, bulge));
+    refr_b -= .2 * edge;
+    refr_r *= u_refraction;
+    refr_b *= u_refraction;
+    vec3 w = vec3(thin_strip_1_width, thin_strip_2_width, wide_strip_ratio);
+    w[1] -= .02 * smoothstep(.0, 1., edge + bulge);
+    float stripe_r = mod(dir + refr_r, 1.);
+    float r = get_color_channel(color1.r, color2.r, stripe_r, w, 0.02 + .03 * u_refraction * bulge, bulge);
+    float stripe_g = mod(dir, 1.);
+    float g = get_color_channel(color1.g, color2.g, stripe_g, w, 0.01 / (1. - diagonal), bulge);
+    float stripe_b = mod(dir - refr_b, 1.);
+    float b = get_color_channel(color1.b, color2.b, stripe_b, w, .01, bulge);
+    color = vec3(r, g, b);
+    color *= opacity;
+    fragColor = vec4(color, opacity);
+}
+`;
+
+export default function MetallicPaint({
+  imageData,
+  params = defaultParams,
+}) {
+  const canvasRef = useRef(null);
+  const [gl, setGl] = useState(null);
+  const [uniforms, setUniforms] = useState({});
+  const totalAnimationTime = useRef(0);
+  const lastRenderTime = useRef(0);
+
+  function updateUniforms() {
+    if (!gl || !uniforms) return;
+    gl.uniform1f(uniforms.u_edge, params.edge);
+    gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
+    gl.uniform1f(uniforms.u_time, 0);
+    gl.uniform1f(uniforms.u_patternScale, params.patternScale);
+    gl.uniform1f(uniforms.u_refraction, params.refraction);
+    gl.uniform1f(uniforms.u_liquid, params.liquid);
+  }
+
+  useEffect(() => {
+    function initShader() {
+      const canvas = canvasRef.current;
+      const gl = canvas?.getContext("webgl2", {
+        antialias: true,
+        alpha: true,
+      });
+      if (!canvas || !gl) {
+        return;
+      }
+
+      function createShader(
+        gl,
+        sourceCode,
+        type
+      ) {
+        const shader = gl.createShader(type);
+        if (!shader) {
+          return null;
+        }
+
+        gl.shaderSource(shader, sourceCode);
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error(
+            "An error occurred compiling the shaders: " +
+            gl.getShaderInfoLog(shader)
+          );
+          gl.deleteShader(shader);
+          return null;
+        }
+
+        return shader;
+      }
+
+      const vertexShader = createShader(
+        gl,
+        vertexShaderSource,
+        gl.VERTEX_SHADER
+      );
+      const fragmentShader = createShader(
+        gl,
+        liquidFragSource,
+        gl.FRAGMENT_SHADER
+      );
+      const program = gl.createProgram();
+      if (!program || !vertexShader || !fragmentShader) {
+        return;
+      }
+
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error(
+          "Unable to initialize the shader program: " +
+          gl.getProgramInfoLog(program)
+        );
+        return null;
+      }
+
+      function getUniforms(program, gl) {
+        let uniforms = {};
+        let uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+        for (let i = 0; i < uniformCount; i++) {
+          let uniformName = gl.getActiveUniform(program, i)?.name;
+          if (!uniformName) continue;
+          uniforms[uniformName] = gl.getUniformLocation(
+            program,
+            uniformName
+          );
+        }
+        return uniforms;
+      }
+      const uniforms = getUniforms(program, gl);
+      setUniforms(uniforms);
+
+      const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+      const vertexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+      gl.useProgram(program);
+
+      const positionLocation = gl.getAttribLocation(program, "a_position");
+      gl.enableVertexAttribArray(positionLocation);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+      setGl(gl);
+    }
+
+    initShader();
+    updateUniforms();
+  }, []);
+
+  useEffect(() => {
+    if (!gl || !uniforms) return;
+    updateUniforms();
+  }, [gl, params, uniforms]);
+
+  useEffect(() => {
+    if (!gl || !uniforms) return;
+
+    let renderId;
+
+    function render(currentTime) {
+      const deltaTime = currentTime - lastRenderTime.current;
+      lastRenderTime.current = currentTime;
+
+      totalAnimationTime.current += deltaTime * params.speed;
+      gl.uniform1f(uniforms.u_time, totalAnimationTime.current);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      renderId = requestAnimationFrame(render);
+    }
+
+    lastRenderTime.current = performance.now();
+    renderId = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(renderId);
+    };
+  }, [gl, params.speed]);
+
+  useEffect(() => {
+    const canvasEl = canvasRef.current;
+    if (!canvasEl || !gl || !uniforms) return;
+
+    function resizeCanvas() {
+      if (!canvasEl || !gl || !uniforms || !imageData) return;
+      const imgRatio = imageData.width / imageData.height;
+      gl.uniform1f(uniforms.u_img_ratio, imgRatio);
+
+      const side = 1000;
+      canvasEl.width = side * devicePixelRatio;
+      canvasEl.height = side * devicePixelRatio;
+      gl.viewport(0, 0, canvasEl.height, canvasEl.height);
+      gl.uniform1f(uniforms.u_ratio, 1);
+      gl.uniform1f(uniforms.u_img_ratio, imgRatio);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [gl, uniforms, imageData]);
+
+  useEffect(() => {
+    if (!gl || !uniforms) return;
+
+    const existingTexture = gl.getParameter(gl.TEXTURE_BINDING_2D);
+    if (existingTexture) {
+      gl.deleteTexture(existingTexture);
+    }
+
+    const imageTexture = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, imageTexture);
+
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+
+    try {
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        imageData?.width,
+        imageData?.height,
+        0,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        imageData?.data
+      );
+
+      gl.uniform1i(uniforms.u_image_texture, 0);
+    } catch (e) {
+      console.error("Error uploading texture:", e);
+    }
+
+    return () => {
+      if (imageTexture) {
+        gl.deleteTexture(imageTexture);
+      }
+    };
+  }, [gl, uniforms, imageData]);
+
+  return (
+    <canvas ref={canvasRef} className="block w-full h-full object-contain" />
+  );
+}
+
+✅ Blob Cursor
+👉 Personaliza el cursor con una burbuja líquida que cambia al pasar sobre links. Perfecto para reforzar la estética sintética y fluida.
+installation
+npm i gsap
+usage
+import BlobCursor from './BlobCursor';
+
+<BlobCursor
+  blobType="circle"
+  fillColor="#5227FF"
+  trailCount={3}
+  sizes={[60, 125, 75]}
+  innerSizes={[20, 35, 25]}
+  innerColor="rgba(255,255,255,0.8)"
+  opacities={[0.6, 0.6, 0.6]}
+  shadowColor="rgba(0,0,0,0.75)"
+  shadowBlur={5}
+  shadowOffsetX={10}
+  shadowOffsetY={10}
+  filterStdDeviation={30}
+  useFilter={true}
+  fastDuration={0.1}
+  slowDuration={0.5}
+  zIndex={100}
+/>
+code
+Default
+
+Tailwind
+
+"use client";
+
+import { useRef, useEffect, useCallback } from "react";
+import gsap from "gsap";
+
+export default function BlobCursor({
+  blobType = "circle",
+  fillColor = "#5227FF",
+  trailCount = 3,
+  sizes = [60, 125, 75],
+  innerSizes = [20, 35, 25],
+  innerColor = "rgba(255,255,255,0.8)",
+  opacities = [0.6, 0.6, 0.6],
+  shadowColor = "rgba(0,0,0,0.75)",
+  shadowBlur = 5,
+  shadowOffsetX = 10,
+  shadowOffsetY = 10,
+  filterId = "blob",
+  filterStdDeviation = 30,
+  filterColorMatrixValues = "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 35 -10",
+  useFilter = true,
+  fastDuration = 0.1,
+  slowDuration = 0.5,
+  fastEase = "power3.out",
+  slowEase = "power1.out",
+  zIndex = 100,
+}) {
+  const containerRef = useRef(null);
+  const blobsRef = useRef([]);
+
+  const updateOffset = useCallback(() => {
+    if (!containerRef.current) return { left: 0, top: 0 };
+    const rect = containerRef.current.getBoundingClientRect();
+    return { left: rect.left, top: rect.top };
+  }, []);
+
+  const handleMove = useCallback(
+    (e) => {
+      const { left, top } = updateOffset();
+      const x = "clientX" in e ? e.clientX : e.touches[0].clientX;
+      const y = "clientY" in e ? e.clientY : e.touches[0].clientY;
+
+      blobsRef.current.forEach((el, i) => {
+        if (!el) return;
+        const isLead = i === 0;
+        gsap.to(el, {
+          x: x - left,
+          y: y - top,
+          duration: isLead ? fastDuration : slowDuration,
+          ease: isLead ? fastEase : slowEase,
+        });
+      });
+    },
+    [updateOffset, fastDuration, slowDuration, fastEase, slowEase]
+  );
+
+  useEffect(() => {
+    const onResize = () => updateOffset();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [updateOffset]);
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleMove}
+      onTouchMove={handleMove}
+      className="relative top-0 left-0 w-full h-full"
+      style={{ zIndex }}
+    >
+      {useFilter && (
+        <svg className="absolute w-0 h-0">
+          <filter id={filterId}>
+            <feGaussianBlur
+              in="SourceGraphic"
+              result="blur"
+              stdDeviation={filterStdDeviation}
+            />
+            <feColorMatrix in="blur" values={filterColorMatrixValues} />
+          </filter>
+        </svg>
+      )}
+
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden select-none cursor-default"
+        style={{ filter: useFilter ? `url(#${filterId})` : undefined }}
+      >
+        {Array.from({ length: trailCount }).map((_, i) => (
+          <div
+            key={i}
+            ref={(el) => (blobsRef.current[i] = el)}
+            className="absolute will-change-transform transform -translate-x-1/2 -translate-y-1/2"
+            style={{
+              width: sizes[i],
+              height: sizes[i],
+              borderRadius: blobType === "circle" ? "50%" : "0",
+              backgroundColor: fillColor,
+              opacity: opacities[i],
+              boxShadow: `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px 0 ${shadowColor}`,
+            }}
+          >
+            <div
+              className="absolute"
+              style={{
+                width: innerSizes[i],
+                height: innerSizes[i],
+                top: (sizes[i] - innerSizes[i]) / 2,
+                left: (sizes[i] - innerSizes[i]) / 2,
+                backgroundColor: innerColor,
+                borderRadius: blobType === "circle" ? "50%" : "0",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+🧩 COMPONENTS (interfaz, navegación, vitrinas)
+✅ Fluid Glass
+👉 Ideal para menús, headers o reproductores. Es un fondo blur tipo vidrio líquido que encaja con toda tu paleta y estilo.
+installation
+npm install three @react-three/fiber @react-three/drei maath
+usage
+// IMPORTANT INFO BELOW
+// This component requires a 3D model to function correctly.
+// You can find three example models in the 'public/assets/3d' directory of the repository:
+// - 'lens.glb'
+// - 'bar.glb'
+// - 'cube.glb'
+// Make sure to place these models in the correct directory or update the paths accordingly.
+
+import FluidGlass from './FluidGlass'
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <FluidGlass 
+    mode="lens" // or "bar", "cube"
+    lensProps={{
+      scale: 0.25,
+      ior: 1.15,
+      thickness: 5,
+      chromaticAberration: 0.1,
+      anisotropy: 0.01  
+    }}
+    barProps={} // add specific props if using bar mode
+    cubeProps={} // add specific props if using cube mode
+  />
+</div>
+code
+Default
+
+Tailwind
+
+/* eslint-disable react/no-unknown-property */
+import * as THREE from 'three'
+import { useRef, useState, useEffect, memo } from 'react'
+import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
+import {
+  useFBO,
+  useGLTF,
+  useScroll,
+  Image,
+  Scroll,
+  Preload,
+  ScrollControls,
+  MeshTransmissionMaterial,
+  Text,
+} from '@react-three/drei'
+import { easing } from 'maath'
+
+export default function FluidGlass({
+  mode = 'lens',
+  lensProps = {},
+  barProps = {},
+  cubeProps = {},
+}) {
+  const Wrapper = mode === 'bar' ? Bar : mode === 'cube' ? Cube : Lens
+  const rawOverrides =
+    mode === 'bar' ? barProps : mode === 'cube' ? cubeProps : lensProps
+
+  const {
+    navItems = [
+      { label: 'Home', link: '' },
+      { label: 'About', link: '' },
+      { label: 'Contact', link: '' },
+    ],
+    ...modeProps
+  } = rawOverrides
+
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 20], fov: 15 }}
+      gl={{ alpha: true }}
+    >
+      <ScrollControls damping={0.2} pages={3} distance={0.4}>
+        {mode === 'bar' && <NavItems items={navItems} />}
+        <Wrapper modeProps={modeProps}>
+          <Scroll>
+            <Typography />
+            <Images />
+          </Scroll>
+          <Scroll html />
+          <Preload />
+        </Wrapper>
+      </ScrollControls>
+    </Canvas>
+  )
+}
+
+const ModeWrapper = memo(function ModeWrapper({
+  children,
+  glb,
+  geometryKey,
+  lockToBottom = false,
+  followPointer = true,
+  modeProps = {},
+  ...props
+}) {
+  const ref = useRef()
+  const { nodes } = useGLTF(glb)
+  const buffer = useFBO()
+  const { viewport: vp } = useThree()
+  const [scene] = useState(() => new THREE.Scene())
+  const geoWidthRef = useRef(1)
+
+  useEffect(() => {
+    const geo = nodes[geometryKey]?.geometry
+    geo.computeBoundingBox()
+    geoWidthRef.current =
+      geo.boundingBox.max.x - geo.boundingBox.min.x || 1
+  }, [nodes, geometryKey])
+
+  useFrame((state, delta) => {
+    const { gl, viewport, pointer, camera } = state
+    const v = viewport.getCurrentViewport(camera, [0, 0, 15])
+
+    const destX = followPointer ? (pointer.x * v.width) / 2 : 0
+    const destY = lockToBottom
+      ? -v.height / 2 + 0.2
+      : followPointer
+        ? (pointer.y * v.height) / 2
+        : 0
+    easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta)
+
+    if (modeProps.scale == null) {
+      const maxWorld = v.width * 0.9
+      const desired = maxWorld / geoWidthRef.current
+      ref.current.scale.setScalar(Math.min(0.15, desired))
+    }
+
+    gl.setRenderTarget(buffer)
+    gl.render(scene, camera)
+    gl.setRenderTarget(null)
+
+    // Background Color
+    gl.setClearColor(0x5227ff, 1)
+  })
+
+  const {
+    scale,
+    ior,
+    thickness,
+    anisotropy,
+    chromaticAberration,
+    ...extraMat
+  } = modeProps
+
+  return (
+    <>
+      {createPortal(children, scene)}
+      <mesh scale={[vp.width, vp.height, 1]}>
+        <planeGeometry />
+        <meshBasicMaterial map={buffer.texture} transparent />
+      </mesh>
+      <mesh
+        ref={ref}
+        scale={scale ?? 0.15}
+        rotation-x={Math.PI / 2}
+        geometry={nodes[geometryKey]?.geometry}
+        {...props}
+      >
+        <MeshTransmissionMaterial
+          buffer={buffer.texture}
+          ior={ior ?? 1.15}
+          thickness={thickness ?? 5}
+          anisotropy={anisotropy ?? 0.01}
+          chromaticAberration={chromaticAberration ?? 0.1}
+          {...extraMat}
+        />
+      </mesh>
+    </>
+  )
+})
+
+function Lens({ modeProps, ...p }) {
+  return (
+    <ModeWrapper
+      glb="/assets/3d/lens.glb"
+      geometryKey="Cylinder"
+      followPointer
+      modeProps={modeProps}
+      {...p}
+    />
+  )
+}
+
+function Cube({ modeProps, ...p }) {
+  return (
+    <ModeWrapper
+      glb="/assets/3d/cube.glb"
+      geometryKey="Cube"
+      followPointer
+      modeProps={modeProps}
+      {...p}
+    />
+  )
+}
+
+function Bar({ modeProps = {}, ...p }) {
+  const defaultMat = {
+    transmission: 1,
+    roughness: 0,
+    thickness: 10,
+    ior: 1.15,
+    color: '#ffffff',
+    attenuationColor: '#ffffff',
+    attenuationDistance: 0.25,
+  }
+
+  return (
+    <ModeWrapper
+      glb="/assets/3d/bar.glb"
+      geometryKey="Cube"
+      lockToBottom
+      followPointer={false}
+      modeProps={{ ...defaultMat, ...modeProps }}
+      {...p}
+    />
+  )
+}
+
+function NavItems({ items }) {
+  const group = useRef()
+  const { viewport, camera } = useThree()
+
+  const DEVICE = {
+    mobile: { max: 639, spacing: 0.2, fontSize: 0.035 },
+    tablet: { max: 1023, spacing: 0.24, fontSize: 0.045 },
+    desktop: { max: Infinity, spacing: 0.3, fontSize: 0.045 },
+  }
+  const getDevice = () => {
+    const w = window.innerWidth
+    return w <= DEVICE.mobile.max
+      ? 'mobile'
+      : w <= DEVICE.tablet.max
+        ? 'tablet'
+        : 'desktop'
+  }
+
+  const [device, setDevice] = useState(getDevice())
+
+  useEffect(() => {
+    const onResize = () => setDevice(getDevice())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const { spacing, fontSize } = DEVICE[device]
+
+  useFrame(() => {
+    if (!group.current) return
+    const v = viewport.getCurrentViewport(camera, [0, 0, 15])
+    group.current.position.set(0, -v.height / 2 + 0.2, 15.1)
+
+    group.current.children.forEach((child, i) => {
+      child.position.x = (i - (items.length - 1) / 2) * spacing
+    })
+  })
+
+  const handleNavigate = (link) => {
+    if (!link) return
+    link.startsWith('#')
+      ? (window.location.hash = link)
+      : (window.location.href = link)
+  }
+
+  return (
+    <group ref={group} renderOrder={10}>
+      {items.map(({ label, link }) => (
+        <Text
+          key={label}
+          fontSize={fontSize}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+          font="/assets/fonts/figtreeblack.ttf"
+          depthWrite={false}
+          outlineWidth={0}
+          outlineBlur="20%"
+          outlineColor="#000"
+          outlineOpacity={0.5}
+          depthTest={false}
+          renderOrder={10}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleNavigate(link)
+          }}
+          onPointerOver={() => (document.body.style.cursor = 'pointer')}
+          onPointerOut={() => (document.body.style.cursor = 'auto')}
+        >
+          {label}
+        </Text>
+      ))}
+    </group>
+  )
+}
+
+function Images() {
+  const group = useRef()
+  const data = useScroll()
+  const { height } = useThree((s) => s.viewport)
+
+  useFrame(() => {
+    group.current.children[0].material.zoom = 1 + data.range(0, 1 / 3) / 3
+    group.current.children[1].material.zoom = 1 + data.range(0, 1 / 3) / 3
+    group.current.children[2].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+    group.current.children[3].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+    group.current.children[4].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+  })
+
+  return (
+    <group ref={group}>
+      <Image
+        position={[-2, 0, 0]}
+        scale={[3, height / 1.1, 1]}
+        url="https://images.unsplash.com/photo-1595001354022-29103be3b73a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+      <Image
+        position={[2, 0, 3]}
+        scale={3}
+        url="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+      <Image
+        position={[-2.05, -height, 6]}
+        scale={[1, 3, 1]}
+        url="https://images.unsplash.com/photo-1513682121497-80211f36a7d3?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+      <Image
+        position={[-0.6, -height, 9]}
+        scale={[1, 2, 1]}
+        url="https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?q=80&w=2843&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+      <Image
+        position={[0.75, -height, 10.5]}
+        scale={1.5}
+        url="https://images.unsplash.com/photo-1505069190533-da1c9af13346?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+    </group>
+  )
+}
+
+function Typography() {
+  const DEVICE = {
+    mobile: { fontSize: 0.2 },
+    tablet: { fontSize: 0.40 },
+    desktop: { fontSize: 0.7 },
+  }
+  const getDevice = () => {
+    const w = window.innerWidth
+    return w <= 639
+      ? 'mobile'
+      : w <= 1023
+        ? 'tablet'
+        : 'desktop'
+  }
+
+  const [device, setDevice] = useState(getDevice())
+
+  useEffect(() => {
+    const onResize = () => setDevice(getDevice())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const { fontSize } = DEVICE[device]
+
+  return (
+    <Text
+      position={[0, 0, 12]}
+      font="/assets/fonts/figtreeblack.ttf"
+      fontSize={fontSize}
+      letterSpacing={-0.05}
+      outlineWidth={0}
+      outlineBlur="20%"
+      outlineColor="#000"
+      outlineOpacity={0.5}
+      color="white"
+      anchorX="center"
+      anchorY="middle"
+    >
+      React Bits
+    </Text>
+  )
+}
+
+✅ Gooey Nav
+👉 Navegación con efectos de deformación. Muy llamativa para la web móvil o menús en versión “explorar”.
+usage
+import GooeyNav from './GooeyNav'
+
+// update with your own items
+const items = [
+  { label: "Home", href: "#" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
+];
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <GooeyNav
+    items={items}
+    particleCount={15}
+    particleDistances={[90, 10]}
+    particleR={100}
+    initialActiveIndex={0}
+    animationTime={600}
+    timeVariance={300}
+    colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+  />
+</div>
+code
+Default
+
+Tailwind
+
+import { useRef, useEffect, useState } from "react";
+
+const GooeyNav = ({
+  items,
+  animationTime = 600,
+  particleCount = 15,
+  particleDistances = [90, 10],
+  particleR = 100,
+  timeVariance = 300,
+  colors = [1, 2, 3, 1, 2, 3, 1, 4],
+  initialActiveIndex = 0,
+}) => {
+  const containerRef = useRef(null);
+  const navRef = useRef(null);
+  const filterRef = useRef(null);
+  const textRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const noise = (n = 1) => n / 2 - Math.random() * n;
+  const getXY = (
+    distance,
+    pointIndex,
+    totalPoints
+  ) => {
+    const angle =
+      ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
+    return [distance * Math.cos(angle), distance * Math.sin(angle)];
+  };
+  const createParticle = (
+    i,
+    t,
+    d,
+    r
+  ) => {
+    let rotate = noise(r / 10);
+    return {
+      start: getXY(d[0], particleCount - i, particleCount),
+      end: getXY(d[1] + noise(7), particleCount - i, particleCount),
+      time: t,
+      scale: 1 + noise(0.2),
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotate: rotate > 0 ? (rotate + r / 20) * 10 : (rotate - r / 20) * 10,
+    };
+  };
+  const makeParticles = (element) => {
+    const d = particleDistances;
+    const r = particleR;
+    const bubbleTime = animationTime * 2 + timeVariance;
+    element.style.setProperty("--time", `${bubbleTime}ms`);
+    for (let i = 0; i < particleCount; i++) {
+      const t = animationTime * 2 + noise(timeVariance * 2);
+      const p = createParticle(i, t, d, r);
+      element.classList.remove("active");
+      setTimeout(() => {
+        const particle = document.createElement("span");
+        const point = document.createElement("span");
+        particle.classList.add("particle");
+        particle.style.setProperty("--start-x", `${p.start[0]}px`);
+        particle.style.setProperty("--start-y", `${p.start[1]}px`);
+        particle.style.setProperty("--end-x", `${p.end[0]}px`);
+        particle.style.setProperty("--end-y", `${p.end[1]}px`);
+        particle.style.setProperty("--time", `${p.time}ms`);
+        particle.style.setProperty("--scale", `${p.scale}`);
+        particle.style.setProperty("--color", `var(--color-${p.color}, white)`);
+        particle.style.setProperty("--rotate", `${p.rotate}deg`);
+        point.classList.add("point");
+        particle.appendChild(point);
+        element.appendChild(particle);
+        requestAnimationFrame(() => {
+          element.classList.add("active");
+        });
+        setTimeout(() => {
+          try {
+            element.removeChild(particle);
+          } catch {
+            // do nothing
+          }
+        }, t);
+      }, 30);
+    }
+  };
+  const updateEffectPosition = (element) => {
+    if (!containerRef.current || !filterRef.current || !textRef.current) return;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const pos = element.getBoundingClientRect();
+    const styles = {
+      left: `${pos.x - containerRect.x}px`,
+      top: `${pos.y - containerRect.y}px`,
+      width: `${pos.width}px`,
+      height: `${pos.height}px`,
+    };
+    Object.assign(filterRef.current.style, styles);
+    Object.assign(textRef.current.style, styles);
+    textRef.current.innerText = element.innerText;
+  };
+  const handleClick = (e, index) => {
+    const liEl = e.currentTarget;
+    if (activeIndex === index) return;
+    setActiveIndex(index);
+    updateEffectPosition(liEl);
+    if (filterRef.current) {
+      const particles = filterRef.current.querySelectorAll(".particle");
+      particles.forEach((p) => filterRef.current.removeChild(p));
+    }
+    if (textRef.current) {
+      textRef.current.classList.remove("active");
+      void textRef.current.offsetWidth;
+      textRef.current.classList.add("active");
+    }
+    if (filterRef.current) {
+      makeParticles(filterRef.current);
+    }
+  };
+  const handleKeyDown = (
+    e,
+    index
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const liEl = e.currentTarget.parentElement;
+      if (liEl) {
+        handleClick(
+          { currentTarget: liEl },
+          index
+        );
+      }
+    }
+  };
+  useEffect(() => {
+    if (!navRef.current || !containerRef.current) return;
+    const activeLi = navRef.current.querySelectorAll("li")[
+      activeIndex
+    ];
+    if (activeLi) {
+      updateEffectPosition(activeLi);
+      textRef.current?.classList.add("active");
+    }
+    const resizeObserver = new ResizeObserver(() => {
+      const currentActiveLi = navRef.current?.querySelectorAll("li")[
+        activeIndex
+      ];
+      if (currentActiveLi) {
+        updateEffectPosition(currentActiveLi);
+      }
+    });
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, [activeIndex]);
+
+  return (
+    <>
+      {/* This effect is quite difficult to recreate faithfully using Tailwind, so a style tag is a necessary workaround */}
+      <style>
+        {`
+          :root {
+            --linear-ease: linear(0, 0.068, 0.19 2.7%, 0.804 8.1%, 1.037, 1.199 13.2%, 1.245, 1.27 15.8%, 1.274, 1.272 17.4%, 1.249 19.1%, 0.996 28%, 0.949, 0.928 33.3%, 0.926, 0.933 36.8%, 1.001 45.6%, 1.013, 1.019 50.8%, 1.018 54.4%, 1 63.1%, 0.995 68%, 1.001 85%, 1);
+          }
+          .effect {
+            position: absolute;
+            opacity: 1;
+            pointer-events: none;
+            display: grid;
+            place-items: center;
+            z-index: 1;
+          }
+          .effect.text {
+            color: white;
+            transition: color 0.3s ease;
+          }
+          .effect.text.active {
+            color: black;
+          }
+          .effect.filter {
+            filter: blur(7px) contrast(100) blur(0);
+            mix-blend-mode: lighten;
+          }
+          .effect.filter::before {
+            content: "";
+            position: absolute;
+            inset: -75px;
+            z-index: -2;
+            background: black;
+          }
+          .effect.filter::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: white;
+            transform: scale(0);
+            opacity: 0;
+            z-index: -1;
+            border-radius: 9999px;
+          }
+          .effect.active::after {
+            animation: pill 0.3s ease both;
+          }
+          @keyframes pill {
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+          .particle,
+          .point {
+            display: block;
+            opacity: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 9999px;
+            transform-origin: center;
+          }
+          .particle {
+            --time: 5s;
+            position: absolute;
+            top: calc(50% - 8px);
+            left: calc(50% - 8px);
+            animation: particle calc(var(--time)) ease 1 -350ms;
+          }
+          .point {
+            background: var(--color);
+            opacity: 1;
+            animation: point calc(var(--time)) ease 1 -350ms;
+          }
+          @keyframes particle {
+            0% {
+              transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+              opacity: 1;
+              animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+            }
+            70% {
+              transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+              opacity: 1;
+              animation-timing-function: ease;
+            }
+            85% {
+              transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
+              opacity: 1;
+            }
+            100% {
+              transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+              opacity: 1;
+            }
+          }
+          @keyframes point {
+            0% {
+              transform: scale(0);
+              opacity: 0;
+              animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+            }
+            25% {
+              transform: scale(calc(var(--scale) * 0.25));
+            }
+            38% {
+              opacity: 1;
+            }
+            65% {
+              transform: scale(var(--scale));
+              opacity: 1;
+              animation-timing-function: ease;
+            }
+            85% {
+              transform: scale(var(--scale));
+              opacity: 1;
+            }
+            100% {
+              transform: scale(0);
+              opacity: 0;
+            }
+          }
+          li.active {
+            color: black;
+            text-shadow: none;
+          }
+          li.active::after {
+            opacity: 1;
+            transform: scale(1);
+          }
+          li::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            background: white;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            z-index: -1;
+          }
+        `}
+      </style>
+      <div className="relative" ref={containerRef}>
+        <nav
+          className="flex relative"
+          style={{ transform: "translate3d(0,0,0.01px)" }}
+        >
+          <ul
+            ref={navRef}
+            className="flex gap-8 list-none p-0 px-4 m-0 relative z-[3]"
+            style={{
+              color: "white",
+              textShadow: "0 1px 1px hsl(205deg 30% 10% / 0.2)",
+            }}
+          >
+            {items.map((item, index) => (
+              <li
+                key={index}
+                className={`py-[0.6em] px-[1em] rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${activeIndex === index ? "active" : ""
+                  }`}
+                onClick={(e) => handleClick(e, index)}
+              >
+                <a
+                  href={item.href}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  className="outline-none"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <span className="effect filter" ref={filterRef} />
+        <span className="effect text" ref={textRef} />
+      </div>
+    </>
+  );
+};
+
+export default GooeyNav;
+
+✅ Tilted Card
+👉 Para mostrar portadas de álbumes, beats o prendas con ligera inclinación 3D al mover el mouse.
+installation
+npm i framer-motion
+usage
+import TiltedCard from './TiltedCard';
+
+<TiltedCard
+  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
+  altText="Kendrick Lamar - GNX Album Cover"
+  captionText="Kendrick Lamar - GNX"
+  containerHeight="300px"
+  containerWidth="300px"
+  imageHeight="300px"
+  imageWidth="300px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text">
+      Kendrick Lamar - GNX
+    </p>
+  }
+/>
+  
+code
+Default
+
+Tailwind
+
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+
+const springValues = {
+  damping: 30,
+  stiffness: 100,
+  mass: 2,
+};
+
+export default function TiltedCard({
+  imageSrc,
+  altText = "Tilted card image",
+  captionText = "",
+  containerHeight = "300px",
+  containerWidth = "100%",
+  imageHeight = "300px",
+  imageWidth = "300px",
+  scaleOnHover = 1.1,
+  rotateAmplitude = 14,
+  showMobileWarning = true,
+  showTooltip = true,
+  overlayContent = null,
+  displayOverlayContent = false,
+}) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useMotionValue(0), springValues);
+  const rotateY = useSpring(useMotionValue(0), springValues);
+  const scale = useSpring(1, springValues);
+  const opacity = useSpring(0);
+  const rotateFigcaption = useSpring(0, {
+    stiffness: 350,
+    damping: 30,
+    mass: 1,
+  });
+
+  const [lastY, setLastY] = useState(0);
+
+  function handleMouse(e) {
+    if (!ref.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+
+    const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
+    const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
+
+    rotateX.set(rotationX);
+    rotateY.set(rotationY);
+
+    x.set(e.clientX - rect.left);
+    y.set(e.clientY - rect.top);
+
+    const velocityY = offsetY - lastY;
+    rotateFigcaption.set(-velocityY * 0.6);
+    setLastY(offsetY);
+  }
+
+  function handleMouseEnter() {
+    scale.set(scaleOnHover);
+    opacity.set(1);
+  }
+
+  function handleMouseLeave() {
+    opacity.set(0);
+    scale.set(1);
+    rotateX.set(0);
+    rotateY.set(0);
+    rotateFigcaption.set(0);
+  }
+
+  return (
+    <figure
+      ref={ref}
+      className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
+      style={{
+        height: containerHeight,
+        width: containerWidth,
+      }}
+      onMouseMove={handleMouse}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {showMobileWarning && (
+        <div className="absolute top-4 text-center text-sm block sm:hidden">
+          This effect is not optimized for mobile. Check on desktop.
+        </div>
+      )}
+
+      <motion.div
+        className="relative [transform-style:preserve-3d]"
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+          rotateX,
+          rotateY,
+          scale,
+        }}
+      >
+        <motion.img
+          src={imageSrc}
+          alt={altText}
+          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        />
+
+        {displayOverlayContent && overlayContent && (
+          <motion.div
+            className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]"
+          >
+            {overlayContent}
+          </motion.div>
+        )}
+      </motion.div>
+
+      {showTooltip && (
+        <motion.figcaption
+          className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
+          style={{
+            x,
+            y,
+            opacity,
+            rotate: rotateFigcaption,
+          }}
+        >
+          {captionText}
+        </motion.figcaption>
+      )}
+    </figure>
+  );
+}
+
+✅ Spotlight Card
+👉 Para destacar artistas o colecciones específicas con efecto de foco. Ideal para la home o sección “Sello”.
+usage
+import SpotlightCard from './SpotlightCard';
+  
+<SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+  // Content goes here
+</SpotlightCard>
+code
+Default
+
+Tailwind
+
+import { useRef, useState } from "react";
+
+const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 255, 255, 0.25)" }) => {
+  const divRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e) => {
+    if (!divRef.current || isFocused) return;
+
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setOpacity(0.6);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setOpacity(0);
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(0.6);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  return (
+    <div
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative rounded-3xl border border-neutral-800 bg-neutral-900 overflow-hidden p-8 ${className}`}
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
+        style={{
+          opacity,
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
+        }}
+      />
+      {children}
+    </div>
+  );
+};
+
+export default SpotlightCard;
+✅ Flying Posters
+👉 Rejilla interactiva que simula movimiento: perfecta para la galería de NFTs, discografía o lookbook de moda.
+usage
+import FlyingPosters from './FlyingPosters'
+
+const items = [
+  'https://picsum.photos/500/500?grayscale', 
+  'https://picsum.photos/600/600?grayscale', 
+  'https://picsum.photos/400/400?grayscale'
+];
+
+<div style={{ height: '600px', position: 'relative' }}>
+  <FlyingPosters items={items}/>
+</div>
+code
+Default
+
+Tailwind
+
+import { useRef, useEffect } from "react";
+import {
+  Renderer,
+  Camera,
+  Transform,
+  Plane,
+  Program,
+  Mesh,
+  Texture,
+} from "ogl";
+
+const vertexShader = `
+precision highp float;
+
+attribute vec3 position;
+attribute vec2 uv;
+attribute vec3 normal;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat3 normalMatrix;
+
+uniform float uPosition;
+uniform float uTime;
+uniform float uSpeed;
+uniform vec3 distortionAxis;
+uniform vec3 rotationAxis;
+uniform float uDistortion;
+
+varying vec2 vUv;
+varying vec3 vNormal;
+
+float PI = 3.141592653589793238;
+mat4 rotationMatrix(vec3 axis, float angle) {
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(
+      oc * axis.x * axis.x + c,         oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+      oc * axis.x * axis.y + axis.z * s,oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+      oc * axis.z * axis.x - axis.y * s,oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+      0.0,                              0.0,                                0.0,                                1.0
+    );
+}
+
+vec3 rotate(vec3 v, vec3 axis, float angle) {
+  mat4 m = rotationMatrix(axis, angle);
+  return (m * vec4(v, 1.0)).xyz;
+}
+
+float qinticInOut(float t) {
+  return t < 0.5
+    ? 16.0 * pow(t, 5.0)
+    : -0.5 * abs(pow(2.0 * t - 2.0, 5.0)) + 1.0;
+}
+
+void main() {
+  vUv = uv;
+  
+  float norm = 0.5;
+  vec3 newpos = position;
+  float offset = (dot(distortionAxis, position) + norm / 2.) / norm;
+  float localprogress = clamp(
+    (fract(uPosition * 5.0 * 0.01) - 0.01 * uDistortion * offset) / (1. - 0.01 * uDistortion),
+    0.,
+    2.
+  );
+  localprogress = qinticInOut(localprogress) * PI;
+  newpos = rotate(newpos, rotationAxis, localprogress);
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(newpos, 1.0);
+}
+`;
+
+const fragmentShader = `
+precision highp float;
+
+uniform vec2 uImageSize;
+uniform vec2 uPlaneSize;
+uniform sampler2D tMap;
+
+varying vec2 vUv;
+
+void main() {
+  vec2 imageSize = uImageSize;
+  vec2 planeSize = uPlaneSize;
+
+  float imageAspect = imageSize.x / imageSize.y;
+  float planeAspect = planeSize.x / planeSize.y;
+  vec2 scale = vec2(1.0, 1.0);
+
+  if (planeAspect > imageAspect) {
+      scale.x = imageAspect / planeAspect;
+  } else {
+      scale.y = planeAspect / imageAspect;
+  }
+
+  vec2 uv = vUv * scale + (1.0 - scale) * 0.5;
+
+  gl_FragColor = texture2D(tMap, uv);
+}
+`;
+
+function AutoBind(self, { include, exclude } = {}) {
+  const getAllProperties = (object) => {
+    const properties = new Set();
+    do {
+      for (const key of Reflect.ownKeys(object)) {
+        properties.add([object, key]);
+      }
+    } while ((object = Reflect.getPrototypeOf(object)) && object !== Object.prototype);
+    return properties;
+  };
+
+  const filter = (key) => {
+    const match = (pattern) =>
+      typeof pattern === "string" ? key === pattern : pattern.test(key);
+
+    if (include) return include.some(match);
+    if (exclude) return !exclude.some(match);
+    return true;
+  };
+
+  for (const [object, key] of getAllProperties(self.constructor.prototype)) {
+    if (key === "constructor" || !filter(key)) continue;
+    const descriptor = Reflect.getOwnPropertyDescriptor(object, key);
+    if (descriptor && typeof descriptor.value === "function") {
+      self[key] = self[key].bind(self);
+    }
+  }
+  return self;
+}
+
+function lerp(p1, p2, t) {
+  return p1 + (p2 - p1) * t;
+}
+
+function map(num, min1, max1, min2, max2, round = false) {
+  const num1 = (num - min1) / (max1 - min1);
+  const num2 = num1 * (max2 - min2) + min2;
+  return round ? Math.round(num2) : num2;
+}
+
+class Media {
+  constructor({
+    gl,
+    geometry,
+    scene,
+    screen,
+    viewport,
+    image,
+    length,
+    index,
+    planeWidth,
+    planeHeight,
+    distortion,
+  }) {
+    this.extra = 0;
+    this.gl = gl;
+    this.geometry = geometry;
+    this.scene = scene;
+    this.screen = screen;
+    this.viewport = viewport;
+    this.image = image;
+    this.length = length;
+    this.index = index;
+    this.planeWidth = planeWidth;
+    this.planeHeight = planeHeight;
+    this.distortion = distortion;
+
+    this.createShader();
+    this.createMesh();
+    this.onResize();
+  }
+
+  createShader() {
+    const texture = new Texture(this.gl, {
+      generateMipmaps: false,
+    });
+
+    this.program = new Program(this.gl, {
+      depthTest: false,
+      depthWrite: false,
+      fragment: fragmentShader,
+      vertex: vertexShader,
+      uniforms: {
+        tMap: { value: texture },
+        uPosition: { value: 0 },
+        uPlaneSize: { value: [0, 0] },
+        uImageSize: { value: [0, 0] },
+        uSpeed: { value: 0 },
+        rotationAxis: { value: [0, 1, 0] },
+        distortionAxis: { value: [1, 1, 0] },
+        uDistortion: { value: this.distortion },
+        uViewportSize: { value: [this.viewport.width, this.viewport.height] },
+        uTime: { value: 0 },
+      },
+      cullFace: false,
+    });
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = this.image;
+    img.onload = () => {
+      texture.image = img;
+      this.program.uniforms.uImageSize.value = [
+        img.naturalWidth,
+        img.naturalHeight,
+      ];
+    };
+  }
+
+  createMesh() {
+    this.plane = new Mesh(this.gl, {
+      geometry: this.geometry,
+      program: this.program,
+    });
+    this.plane.setParent(this.scene);
+  }
+
+  setScale() {
+    this.plane.scale.x =
+      (this.viewport.width * this.planeWidth) / this.screen.width;
+    this.plane.scale.y =
+      (this.viewport.height * this.planeHeight) / this.screen.height;
+
+    this.plane.position.x = 0;
+    this.plane.program.uniforms.uPlaneSize.value = [
+      this.plane.scale.x,
+      this.plane.scale.y,
+    ];
+  }
+
+  onResize({ screen, viewport } = {}) {
+    if (screen) this.screen = screen;
+    if (viewport) {
+      this.viewport = viewport;
+      this.plane.program.uniforms.uViewportSize.value = [
+        this.viewport.width,
+        this.viewport.height,
+      ];
+    }
+    this.setScale();
+
+    this.padding = 5;
+    this.height = this.plane.scale.y + this.padding;
+    this.heightTotal = this.height * this.length;
+
+    this.y = -this.heightTotal / 2 + (this.index + 0.5) * this.height;
+  }
+
+  update(scroll) {
+    this.plane.position.y = this.y - scroll.current - this.extra;
+
+    const position = map(
+      this.plane.position.y,
+      -this.viewport.height,
+      this.viewport.height,
+      5,
+      15
+    );
+
+    this.program.uniforms.uPosition.value = position;
+    this.program.uniforms.uTime.value += 0.04;
+    this.program.uniforms.uSpeed.value = scroll.current;
+
+    const planeHeight = this.plane.scale.y;
+    const viewportHeight = this.viewport.height;
+
+    const topEdge = this.plane.position.y + planeHeight / 2;
+    const bottomEdge = this.plane.position.y - planeHeight / 2;
+
+    if (topEdge < -viewportHeight / 2) {
+      this.extra -= this.heightTotal;
+    } else if (bottomEdge > viewportHeight / 2) {
+      this.extra += this.heightTotal;
+    }
+  }
+}
+
+class Canvas {
+  constructor({
+    container,
+    canvas,
+    items,
+    planeWidth,
+    planeHeight,
+    distortion,
+    scrollEase,
+    cameraFov,
+    cameraZ,
+  }) {
+    this.container = container;
+    this.canvas = canvas;
+    this.items = items;
+    this.planeWidth = planeWidth;
+    this.planeHeight = planeHeight;
+    this.distortion = distortion;
+    this.scroll = {
+      ease: scrollEase,
+      current: 0,
+      target: 0,
+      last: 0,
+    };
+    this.cameraFov = cameraFov;
+    this.cameraZ = cameraZ;
+
+    AutoBind(this);
+
+    this.createRenderer();
+    this.createCamera();
+    this.createScene();
+    this.onResize();
+
+    this.createGeometry();
+    this.createMedias();
+    this.update();
+    this.addEventListeners();
+    this.createPreloader();
+  }
+
+  createRenderer() {
+    this.renderer = new Renderer({
+      canvas: this.canvas,
+      alpha: true,
+      antialias: true,
+      dpr: Math.min(window.devicePixelRatio, 2),
+    });
+    this.gl = this.renderer.gl;
+  }
+
+  createCamera() {
+    this.camera = new Camera(this.gl);
+    this.camera.fov = this.cameraFov;
+    this.camera.position.z = this.cameraZ;
+  }
+
+  createScene() {
+    this.scene = new Transform();
+  }
+
+  createGeometry() {
+    this.planeGeometry = new Plane(this.gl, {
+      heightSegments: 1,
+      widthSegments: 100,
+    });
+  }
+
+  createMedias() {
+    this.medias = this.items.map((image, index) => {
+      return new Media({
+        gl: this.gl,
+        geometry: this.planeGeometry,
+        scene: this.scene,
+        screen: this.screen,
+        viewport: this.viewport,
+        image,
+        length: this.items.length,
+        index,
+        planeWidth: this.planeWidth,
+        planeHeight: this.planeHeight,
+        distortion: this.distortion,
+      });
+    });
+  }
+
+  createPreloader() {
+    this.loaded = 0;
+    if (!this.items.length) return;
+
+    this.items.forEach((src) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.src = src;
+      image.onload = () => {
+        this.loaded += 1;
+        if (this.loaded === this.items.length) {
+          document.documentElement.classList.remove("loading");
+          document.documentElement.classList.add("loaded");
+        }
+      };
+    });
+  }
+
+  onResize() {
+    const rect = this.container.getBoundingClientRect();
+    this.screen = {
+      width: rect.width,
+      height: rect.height,
+    };
+
+    this.renderer.setSize(this.screen.width, this.screen.height);
+
+    this.camera.perspective({
+      aspect: this.gl.canvas.width / this.gl.canvas.height,
+    });
+
+    const fov = (this.camera.fov * Math.PI) / 180;
+    const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+    const width = height * this.camera.aspect;
+
+    this.viewport = { height, width };
+
+    if (this.medias) {
+      this.medias.forEach((media) =>
+        media.onResize({ screen: this.screen, viewport: this.viewport })
+      );
+    }
+  }
+
+  onTouchDown(e) {
+    this.isDown = true;
+    this.scroll.position = this.scroll.current;
+    this.start = e.touches ? e.touches[0].clientY : e.clientY;
+  }
+
+  onTouchMove(e) {
+    if (!this.isDown) return;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    const distance = (this.start - y) * 0.1;
+    this.scroll.target = this.scroll.position + distance;
+  }
+
+  onTouchUp() {
+    this.isDown = false;
+  }
+
+  onWheel(e) {
+    const speed = e.deltaY;
+    this.scroll.target += speed * 0.005;
+  }
+
+  update() {
+    this.scroll.current = lerp(
+      this.scroll.current,
+      this.scroll.target,
+      this.scroll.ease
+    );
+
+    if (this.medias) {
+      this.medias.forEach((media) => media.update(this.scroll));
+    }
+    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.scroll.last = this.scroll.current;
+    requestAnimationFrame(this.update);
+  }
+
+  addEventListeners() {
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("wheel", this.onWheel);
+    window.addEventListener("mousewheel", this.onWheel);
+
+    window.addEventListener("mousedown", this.onTouchDown);
+    window.addEventListener("mousemove", this.onTouchMove);
+    window.addEventListener("mouseup", this.onTouchUp);
+
+    window.addEventListener("touchstart", this.onTouchDown);
+    window.addEventListener("touchmove", this.onTouchMove);
+    window.addEventListener("touchend", this.onTouchUp);
+  }
+
+  destroy() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("wheel", this.onWheel);
+    window.removeEventListener("mousewheel", this.onWheel);
+
+    window.removeEventListener("mousedown", this.onTouchDown);
+    window.removeEventListener("mousemove", this.onTouchMove);
+    window.removeEventListener("mouseup", this.onTouchUp);
+
+    window.removeEventListener("touchstart", this.onTouchDown);
+    window.removeEventListener("touchmove", this.onTouchMove);
+    window.removeEventListener("touchend", this.onTouchUp);
+  }
+}
+
+export default function FlyingPosters({
+  items = [],
+  planeWidth = 320,
+  planeHeight = 320,
+  distortion = 3,
+  scrollEase = 0.1,
+  cameraFov = 45,
+  cameraZ = 20,
+  className,
+  ...props
+}) {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+  const instanceRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    instanceRef.current = new Canvas({
+      container: containerRef.current,
+      canvas: canvasRef.current,
+      items,
+      planeWidth,
+      planeHeight,
+      distortion,
+      scrollEase,
+      cameraFov,
+      cameraZ,
+    });
+
+    return () => {
+      if (instanceRef.current) {
+        instanceRef.current.destroy();
+        instanceRef.current = null;
+      }
+    };
+  }, [items, planeWidth, planeHeight, distortion, scrollEase, cameraFov, cameraZ]);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvasEl = canvasRef.current;
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (instanceRef.current) {
+        instanceRef.current.onWheel(e);
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      e.preventDefault();
+    };
+
+    canvasEl.addEventListener("wheel", handleWheel, { passive: false });
+    canvasEl.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      canvasEl.removeEventListener("wheel", handleWheel);
+      canvasEl.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`w-full h-full overflow-hidden relative z-2 ${className}`}
+      {...props}
+    >
+      <canvas
+        ref={canvasRef}
+        className="block w-full h-full"
+      />
+    </div>
+  );
+}
+
+🎯 INTEGRACIÓN RECOMENDADA (por sección)
+Sección	Animaciones recomendadas
+Home / Hero	Glitch Text + Scramble Text + Blob Cursor + Noise 
+Música / Beats	Tilted Card + Decrypted Text + Glare Hover
+Moda / Colección	Fluid Glass + Flying Posters + Gradient Text
+NFT / Lore	Scramble Text + Metallic Paint + Scroll Reveal
+Nosotros / Historia	Scroll Float + Scroll Reveal + Glitch Text
+Comunidad / Colabora	Spotlight Card + Magnet + Blob Cursor

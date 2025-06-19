@@ -1,0 +1,49 @@
+.glare-hover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-family: var(--bs-font-primary, 'Orbitron', Arial, sans-serif);
+  color: var(--bs-blanco-iridiscente, rgba(255, 255, 255, 0.9));
+  transition: all 0.3s ease;
+}
+
+.glare-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 25px rgba(168, 239, 255, 0.2),
+    0 0 30px rgba(168, 239, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glare-hover:active {
+  transform: translateY(0);
+}
+
+/* Content styling */
+.glare-hover h1,
+.glare-hover h2,
+.glare-hover h3 {
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(168, 239, 255, 0.3);
+}
+
+.glare-hover p {
+  margin: 0;
+  font-family: var(--bs-font-secondary, 'Exo 2', Helvetica, sans-serif);
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .glare-hover {
+    width: 100% !important;
+    min-width: 250px;
+  }
+}
